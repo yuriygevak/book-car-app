@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { OnboardLaunchComponent } from './onboard-launch.component';
+import { OnboardTutorialComponent } from './onboard-tutorial.component';
 
 describe('OnboardLaunchComponent', () => {
-  let component: OnboardLaunchComponent;
-  let fixture: ComponentFixture<OnboardLaunchComponent>;
+  let component: OnboardTutorialComponent;
+  let fixture: ComponentFixture<OnboardTutorialComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OnboardLaunchComponent ],
+      declarations: [ OnboardTutorialComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(OnboardLaunchComponent);
+    fixture = TestBed.createComponent(OnboardTutorialComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -1,0 +1,39 @@
+@import '../../../../../styles/variables';
+
+ion-slides {
+  height: 100%;
+}
+
+.skip-link {
+  display: block;
+  width: 100%;
+  text-align: right;
+  color: $dark-blue-txt;
+  font-weight: 400;
+}
+
+.swiper-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+
+  .slide-icon {
+    margin: 60px auto;
+    height: 33vh;
+  }
+
+  .slide-text {
+    padding-bottom: 48px;
+    margin: 0;
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  .slide-btn {
+    height: 40px;
+    font-size: 16px;
+    margin: 55px auto 20px;
+    text-transform: capitalize;
+  }
+}

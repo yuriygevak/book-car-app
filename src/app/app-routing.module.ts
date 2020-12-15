@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import {OnboardLaunchGuard} from './common/core/guards/onboard-launch-guard.service';
+import { OnboardTutorialGuard } from './common/core/guards';
 
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () => import('./features/main/main.module').then(m => m.MainModule),
-    // canLoad: [OnboardLaunchGuard]
-  },
   {
     path: 'auth',
     loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule),
   },
   {
-    path: 'onboard-launch',
-    loadChildren: () => import('./features/onboard-launch/onboard-launch.module').then(m => m.OnboardLaunchModule),
+    path: 'onboard-tutorial',
+    loadChildren: () => import('./features/onboard-tutorial/onboard-tutorial.module').then(m => m.OnboardTutorialModule),
+  },
+  {
+    path: '',
+    loadChildren: () => import('./features/main/main.module').then(m => m.MainModule),
+    canLoad: [OnboardTutorialGuard]
   },
   {
     path: '',
@@ -26,8 +26,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes)
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }
