@@ -1,5 +1,7 @@
 {
   "name": "book-car-app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
