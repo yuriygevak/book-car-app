@@ -25,7 +25,7 @@ export class OnboardTutorialComponent implements OnInit {
 
   navigateToHome(): void {
     this.storage.set('onboardComplete', true);
-    this.router.navigate(['/']);
+    this.router.navigate(['/auth'], { queryParams: { authOption: 'register' }});
   }
 
   slideClick(slider, index): void {

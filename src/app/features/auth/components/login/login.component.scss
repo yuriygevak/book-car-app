@@ -1,0 +1,22 @@
+.login-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.reset-link-wrap {
+  text-align: right;
+  font-weight: 300;
+}
+
+.form-control {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.form-control-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+}

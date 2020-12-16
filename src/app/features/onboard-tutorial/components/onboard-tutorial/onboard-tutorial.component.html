@@ -1,12 +1,13 @@
 <ion-content>
-  <ion-slides pager="true" [options]="slideOpts" #slider>
-    <ion-slide *ngFor="let slide of slides; let i = index">
+  <ion-slides mode="md" pager="true" [options]="slideOpts" #slider>
+    <ion-slide mode="md" *ngFor="let slide of slides; let i = index">
       <a class="skip-link"
          (click)="navigateToHome()">Skip</a>
       <div>
         <img src='{{ slide.icon }}' class="slide-icon">
         <h1 class="slide-text">{{ slide.text }}</h1>
-        <ion-button expand="block"
+        <ion-button mode="md"
+                    expand="block"
                     class="orange-btn slide-btn"
                     (click)="slideClick(slider, i)">
           <span *ngIf="i !== slides.length - 1">next</span>

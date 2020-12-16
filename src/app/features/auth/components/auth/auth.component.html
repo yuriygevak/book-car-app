@@ -1,0 +1,62 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <ion-title class="page-title">
+      <ng-container *ngIf="!isResetPassword">{{ currentPage }}</ng-container>
+      <ng-container *ngIf="isResetPassword">Reset your password</ng-container>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <div class="page-content">
+    <div>
+      <div class="page-image-container">
+        <img src="/assets/icons/{{currentPage}}-icon.svg">
+      </div>
+
+      <ng-container *ngIf="!isResetPassword">
+        <app-login *ngIf="currentPage === 'login'"
+                   [form]="form"
+                   (resetPasswordEvent)="switchToResetPassword($event)"></app-login>
+        <app-register *ngIf="currentPage === 'register'"
+                      [form]="form"></app-register>
+      </ng-container>
+
+      <ng-container *ngIf="isResetPassword">
+        <form [formGroup]="resetPasswordForm">
+          <p>Enter your user account's verified email address and we will send you a password reset link. *</p>
+          <div class="form-control">
+            <img src="assets/icons/email-icon.svg" class="form-control-icon">
+            <ion-item>
+              <ion-input type="email"
+                         formControlName="email"
+                         mode="md"
+                         placeholder="Email *"
+              ></ion-input>
+            </ion-item>
+          </div>
+          <div class="reset-link-wrap">
+            <span (click)="switchBackToLogin()" class="switch-link">Back to login?</span>
+          </div>
+        </form>
+      </ng-container>
+
+    </div>
+
+    <div>
+      <div class="switch-form">
+        <ng-container *ngIf="currentPage === 'login'">
+          Don’t have account? <a class="link" (click)="switchForm('register')">Register</a> here.
+        </ng-container>
+        <ng-container *ngIf="currentPage === 'register'">
+          Already a member? <a class="link" (click)="switchForm('login')">Login</a> here.
+        </ng-container>
+      </div>
+      <ion-button mode="md"
+                  expand="block"
+                  class="orange-btn"
+      >{{ currentPage }}</ion-button>
+    </div>
+
+  </div>
+</ion-content>

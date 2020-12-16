@@ -15,7 +15,7 @@ ion-slides {
 .swiper-slide {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 20px;
 
   .slide-icon {
@@ -31,8 +31,6 @@ ion-slides {
   }
 
   .slide-btn {
-    height: 40px;
-    font-size: 16px;
     margin: 55px auto 20px;
     text-transform: capitalize;
   }

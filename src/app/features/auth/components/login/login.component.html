@@ -1,0 +1,28 @@
+<h2 class="login-title">Welcome Back,</h2>
+
+<form [formGroup]="form">
+  <div class="form-control">
+    <img src="assets/icons/email-icon.svg" class="form-control-icon">
+    <ion-item>
+      <ion-input type="email"
+                 formControlName="email"
+                 mode="md"
+                 placeholder="Email *"
+      ></ion-input>
+    </ion-item>
+  </div>
+  <div class="form-control">
+    <img src="assets/icons/password-icon.svg" class="form-control-icon">
+    <ion-item>
+      <ion-input type="password"
+                 formControlName="password"
+                 mode="md"
+                 placeholder="Password *"
+      ></ion-input>
+    </ion-item>
+  </div>
+</form>
+
+<div class="reset-link-wrap">
+  <span (click)="resetPassword()">Forgot Password?</span>
+</div>

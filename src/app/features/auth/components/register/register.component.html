@@ -1,0 +1,48 @@
+<form [formGroup]="form">
+  <div class="form-control">
+    <img src="assets/icons/user-icon.svg" class="form-control-icon">
+    <ion-item>
+      <ion-input type="text"
+                 formControlName="name"
+                 mode="md"
+                 placeholder="Name *"
+      ></ion-input>
+    </ion-item>
+  </div>
+  <div class="form-control">
+    <img src="assets/icons/email-icon.svg" class="form-control-icon">
+    <ion-item>
+      <ion-input type="email"
+                 formControlName="email"
+                 mode="md"
+                 placeholder="Email *"
+      ></ion-input>
+    </ion-item>
+  </div>
+  <div class="form-control">
+    <img src="assets/icons/password-icon.svg" class="form-control-icon">
+    <ion-item>
+      <ion-input type="password"
+                 formControlName="password"
+                 mode="md"
+                 placeholder="Password *"
+      ></ion-input>
+    </ion-item>
+  </div>
+  <div class="form-control">
+    <img src="assets/icons/password-icon.svg" class="form-control-icon">
+    <ion-item>
+      <ion-input type="password"
+                 formControlName="confirmPassword"
+                 mode="md"
+                 placeholder="Confirm Password *"
+      ></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="error-message title-error" *ngIf="form.hasError('passMissMatch')">
+    Passwords do not match
+  </div>
+
+</form>
+
