@@ -1,0 +1,24 @@
+<ion-header mode="md">
+  <ion-toolbar>
+    <ion-title class="page-title">
+      <ion-img src="assets/icons/logo-icon.svg" class="toolbar-logo" alt="logo"></ion-img>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngFor="let car of carList">
+    <app-car-card [car]="car"></app-car-card>
+  </ng-container>
+</ion-content>
+
+<ion-tab-bar mode="md" slot="bottom">
+  <ion-tab-button *ngFor="let tab of tabs"
+                  tab="{{ tab.name }}"
+                  mode="md"
+                  routerLink="{{ tab.link }}"
+                  routerLinkActive="active">
+    <ion-icon name="{{ tab.icon }}"></ion-icon>
+    <ion-label>{{ tab.name }}</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

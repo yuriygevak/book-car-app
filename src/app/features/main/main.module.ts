@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MainComponent } from './containers/main/main.component';
+import { IonicModule } from '@ionic/angular';
+
+import { MainComponent } from './containers';
 import { MainRoutingModule } from './main-routing.module';
 
 @NgModule({
@@ -10,6 +12,7 @@ import { MainRoutingModule } from './main-routing.module';
   ],
   imports: [
     CommonModule,
+    IonicModule,
     MainRoutingModule
   ]
 })

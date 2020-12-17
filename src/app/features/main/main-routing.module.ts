@@ -6,22 +6,30 @@ import { MainComponent } from './containers';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'car-list',
     pathMatch: 'full'
   },
   {
     path: '',
     component: MainComponent,
-    // children: [
-    //   {
-    //     path: 'home',
-    //     loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
-    //   },
-    // ]
+    children: [
+      {
+        path: 'car-list',
+        loadChildren: () => import('./pages/car-list/car-list.module').then( m => m.CarListPageModule)
+      },
+      {
+        path: 'car-details',
+        loadChildren: () => import('./pages/car-details/car-details.module').then( m => m.CarDetailsPageModule)
+      },
+      {
+        path: 'booking',
+        loadChildren: () => import('./pages/booking/booking.module').then( m => m.BookingPageModule)
+      },
+    ]
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'car-list',
     pathMatch: 'full'
   },
 ];

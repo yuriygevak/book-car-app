@@ -1,0 +1,26 @@
+<ion-card mode="md">
+  <div class="card-image-wrapper" routerLink="/car-details">
+    <ion-img src="{{ car.imgPath }}"></ion-img>
+    <div class="gradient-block"></div>
+    <ion-card-header mode="md" class="card-header">
+      <ion-card-title class="card-title">
+        <div class="title-part car-name">{{ car.name }}</div>
+        <div class="title-part car-price">from &#36; {{ car.price }}</div>
+      </ion-card-title>
+      <ion-card-subtitle class="card-subtitle">
+        <div class="title-part car-class">{{ car.class }}</div>
+        <div class="title-part car-price-info">for One Way Trip</div>
+      </ion-card-subtitle>
+    </ion-card-header>
+  </div>
+  <ion-card-content mode="md" class="card-content">
+    <div class="flag-wrapper" (click)="flagCar(car)">
+      <img src="assets/icons/flag-icon.svg">
+      <span class="flag-text">Save</span>
+    </div>
+    <ion-button class="orange-btn card-btn"
+                mode="md"
+                expand="block"
+                (click)="goToBook(car)">Book Now</ion-button>
+  </ion-card-content>
+</ion-card>

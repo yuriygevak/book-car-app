@@ -5,6 +5,7 @@ body {
   font-size: 14px;
 }
 
+/* page */
 .page-title {
   font-size: 20px;
   font-weight: 600;
@@ -24,4 +25,18 @@ body {
   &:hover, &:focus, &:active {
     text-decoration: none;
   }
+}
+
+/* forms */
+.form-control {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.form-control-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
 }
