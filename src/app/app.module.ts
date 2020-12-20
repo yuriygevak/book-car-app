@@ -28,7 +28,7 @@ import { OnboardTutorialGuard } from './common/core/guards';
     AngularFirestoreModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     StatusBar,

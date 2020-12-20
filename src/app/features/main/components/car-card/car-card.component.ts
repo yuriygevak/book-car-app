@@ -4,6 +4,7 @@ import {
   Input,
   OnInit
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { CarInfo } from '../../models';
 
@@ -16,16 +17,21 @@ import { CarInfo } from '../../models';
 export class CarCardComponent implements OnInit {
   @Input() car: CarInfo;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {}
 
-  flagCar(car: CarInfo): void {
+  flagCar(): void {
     // todo
   }
 
-  goToBook(car: CarInfo): void {
+  goToBooking(): void {
     // todo
+  }
+
+  viewCarDetails(): void {
+    // todo
+    this.router.navigate(['/car-details']);
   }
 
 }

@@ -27,6 +27,10 @@ body {
   }
 }
 
+.orange-link {
+  color: $orange-txt;
+}
+
 /* forms */
 .form-control {
   position: relative;
@@ -39,4 +43,33 @@ body {
   top: 50%;
   transform: translateY(-50%);
   left: 0;
+}
+
+/* grid */
+.grid-space-between {
+  padding-right: 0;
+  padding-left: 0;
+
+  ion-col:first-child {
+    padding-left: 0;
+  }
+
+  ion-col:last-child {
+    padding-right: 0;
+    text-align: right;
+  }
+
+  .col-inner-wrap {
+    margin-bottom: 12px;
+  }
+}
+
+/* icons */
+ion-icon {
+  color: $orange-txt;
+}
+
+/* button */
+ion-button {
+  margin: 0;
 }

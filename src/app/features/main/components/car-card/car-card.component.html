@@ -1,5 +1,5 @@
 <ion-card mode="md">
-  <div class="card-image-wrapper" routerLink="/car-details">
+  <div class="card-image-wrapper" (click)="viewCarDetails()">
     <ion-img src="{{ car.imgPath }}"></ion-img>
     <div class="gradient-block"></div>
     <ion-card-header mode="md" class="card-header">
@@ -14,13 +14,13 @@
     </ion-card-header>
   </div>
   <ion-card-content mode="md" class="card-content">
-    <div class="flag-wrapper" (click)="flagCar(car)">
+    <div class="flag-wrapper" (click)="flagCar()">
       <img src="assets/icons/flag-icon.svg">
       <span class="flag-text">Save</span>
     </div>
     <ion-button class="orange-btn card-btn"
                 mode="md"
                 expand="block"
-                (click)="goToBook(car)">Book Now</ion-button>
+                (click)="goToBooking()">Book Now</ion-button>
   </ion-card-content>
 </ion-card>

@@ -1,9 +1,86 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>car-details</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <div class="car-details-page">
+    <div>
+      <section class="image-wrapper" style="background-image: url('assets/icons/car-1.png')">
+        <ion-button class="orange-btn car-gallery-btn" mode="md">
+          Gallery
+          <ion-icon name="chevron-forward-outline" class="forward-icon"></ion-icon>
+        </ion-button>
+      </section>
+      <section class="content-section">
+        <h3 class="car-name">{{ carDetails.name }}</h3>
+        <div class="car-description-wrapper">
+          <p class="car-description"
+             [ngClass]="{'show': showDescription}">{{ carDetails.description }}</p>
+          <span class="orange-link read-more-link"
+                (click)="toggleDescription()">
+            <ng-container *ngIf="!showDescription">
+              <span class="link-text">Read More</span>
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </ng-container>
+            <ng-container *ngIf="showDescription">
+              <span class="link-text">Read Less</span>
+              <ion-icon name="chevron-up-outline"></ion-icon>
+            </ng-container>
+          </span>
+        </div>
+        <ion-grid class="grid-space-between">
+          <ion-row>
+            <ion-col>
+              <div class="col-inner-wrap">
+                <ion-img src="assets/icons/email-icon.svg" class="contact-icon" alt="mail-icon"></ion-img>
+                <span class="contact-text">{{ carDetails.email }}</span>
+              </div>
+              <div class="col-inner-wrap">
+                <div class="contact-subtitle">
+                  Price
+                </div>
+                <div>
+                  <span class="car-price">{{ carDetails.price }} &#36;</span> for One Way Trip
+                </div>
+              </div>
+            </ion-col>
+            <ion-col>
+              <div class="col-inner-wrap">
+                <ion-img src="assets/icons/phone-icon.svg" class="contact-icon" alt="mail-icon"></ion-img>
+                <span class="contact-text">{{ carDetails.phone }}</span>
+              </div>
+              <div class="col-inner-wrap">
+                <div class="contact-subtitle">
+                  Ratings
+                </div>
+                <div>
+                  <span class="car-price">
+                    <ng-container *ngFor="let rate of rating">
+                      <ion-icon [name]="rate" class="rate-star-icon"></ion-icon>
+                    </ng-container>
+                  </span>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div class="advantages-title">
+          Advantages
+        </div>
+        <div class="justify-between">
+          <div *ngFor="let item of advantages" class="text-center">
+            <div class="advantage-icon-wrap align-xy-center">
+              <ion-icon [name]="item.iconName"></ion-icon>
+            </div>
+            <div class="advantages-subtitle">{{ item.name }}</div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <section class="button-section">
+      <ion-button class="orange-btn book-btn"
+                  (click)="bookCar()">
+        Book Now
+      </ion-button>
+      <div class="flag-wrapper align-xy-center">
+        <ion-img src="assets/icons/flag-icon.svg" alt="save-car-icon"></ion-img>
+      </div>
+    </section>
+  </div>
 </ion-content>
