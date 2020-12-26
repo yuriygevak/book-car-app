@@ -26,7 +26,7 @@ export class CarCardComponent implements OnInit {
   }
 
   goToBooking(): void {
-    // todo
+    this.router.navigate(['/booking']);
   }
 
   viewCarDetails(): void {

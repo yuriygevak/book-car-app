@@ -9,6 +9,10 @@
   &:hover, &:focus, &:active {
     --background: #ee4f00;
   }
+
+  ion-icon {
+    color: $white-txt;
+  }
 }
 
 .button-solid {
@@ -38,4 +42,9 @@
 /* ion-header */
 .ion-header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* form */
+.sc-ion-textarea-md-h {
+  margin-top: 0;
 }

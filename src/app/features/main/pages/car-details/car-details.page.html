@@ -1,8 +1,10 @@
 <ion-content>
   <div class="car-details-page">
+    <app-back-link [topPosition]="14"></app-back-link>
     <div>
       <section class="image-wrapper" style="background-image: url('assets/icons/car-1.png')">
-        <ion-button class="orange-btn car-gallery-btn" mode="md">
+        <ion-button class="orange-btn car-gallery-btn"
+                    (click)="goToGallery()">
           Gallery
           <ion-icon name="chevron-forward-outline" class="forward-icon"></ion-icon>
         </ion-button>
@@ -16,11 +18,11 @@
                 (click)="toggleDescription()">
             <ng-container *ngIf="!showDescription">
               <span class="link-text">Read More</span>
-              <ion-icon name="chevron-down-outline"></ion-icon>
+              <ion-icon name="chevron-down-outline" class="orange-icon"></ion-icon>
             </ng-container>
             <ng-container *ngIf="showDescription">
               <span class="link-text">Read Less</span>
-              <ion-icon name="chevron-up-outline"></ion-icon>
+              <ion-icon name="chevron-up-outline" class="orange-icon"></ion-icon>
             </ng-container>
           </span>
         </div>
@@ -36,7 +38,7 @@
                   Price
                 </div>
                 <div>
-                  <span class="car-price">{{ carDetails.price }} &#36;</span> for One Way Trip
+                  <span class="car-price">{{ carDetails.price }} CAD</span> for One Way Trip
                 </div>
               </div>
             </ion-col>
@@ -52,7 +54,7 @@
                 <div>
                   <span class="car-price">
                     <ng-container *ngFor="let rate of rating">
-                      <ion-icon [name]="rate" class="rate-star-icon"></ion-icon>
+                      <ion-icon [name]="rate" class="rate-star-icon" class="orange-icon"></ion-icon>
                     </ng-container>
                   </span>
                 </div>
@@ -63,10 +65,10 @@
         <div class="advantages-title">
           Advantages
         </div>
-        <div class="justify-between">
-          <div *ngFor="let item of advantages" class="text-center">
-            <div class="advantage-icon-wrap align-xy-center">
-              <ion-icon [name]="item.iconName"></ion-icon>
+        <div class="d-flex ion-justify-content-between">
+          <div *ngFor="let item of advantages" class="ion-text-center">
+            <div class="advantage-icon-wrap d-flex ion-align-items-center ion-justify-content-center">
+              <ion-icon [name]="item.icon" class="orange-icon"></ion-icon>
             </div>
             <div class="advantages-subtitle">{{ item.name }}</div>
           </div>
@@ -75,7 +77,7 @@
     </div>
     <section class="button-section">
       <ion-button class="orange-btn book-btn"
-                  (click)="bookCar()">
+                  (click)="goToBooking()">
         Book Now
       </ion-button>
       <div class="flag-wrapper align-xy-center">

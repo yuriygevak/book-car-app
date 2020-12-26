@@ -1,4 +1,4 @@
-<ion-header mode="md">
+<ion-header>
   <ion-toolbar>
     <ion-title class="page-title">
       <ng-container *ngIf="!isResetPassword">{{ currentPage }}</ng-container>
@@ -30,7 +30,6 @@
             <ion-item>
               <ion-input type="email"
                          formControlName="email"
-                         mode="md"
                          placeholder="Email *"
               ></ion-input>
             </ion-item>
@@ -52,8 +51,7 @@
           Already a member? <a class="link" (click)="switchForm('login')">Login</a> here.
         </ng-container>
       </div>
-      <ion-button mode="md"
-                  expand="block"
+      <ion-button expand="block"
                   class="orange-btn"
       >{{ currentPage }}</ion-button>
     </div>

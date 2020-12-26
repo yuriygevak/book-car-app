@@ -1,0 +1,14 @@
+.back-link-wrap {
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  z-index: 1;
+
+  .back-link {
+    height: 24px;
+    width: 24px;
+  }
+}

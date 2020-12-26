@@ -5,6 +5,10 @@ body {
   font-size: 14px;
 }
 
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
 /* page */
 .page-title {
   font-size: 20px;
@@ -13,11 +17,19 @@ body {
   text-align: center;
 }
 
-.page-content {
-  height: 100%;
-  padding: 13px 20px 17px !important;
+.page-subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: capitalize;
+  text-align: center;
 }
 
+.page-content {
+  min-height: 100%;
+  padding: 16px 20px !important;
+}
+
+/* links */
 .link {
   font-weight: 500;
   text-decoration: underline;
@@ -64,12 +76,7 @@ body {
   }
 }
 
-/* icons */
-ion-icon {
-  color: $orange-txt;
-}
-
-/* button */
-ion-button {
-  margin: 0;
+/* utils */
+.d-flex {
+  display: flex;
 }

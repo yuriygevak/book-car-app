@@ -26,7 +26,9 @@ import { OnboardTutorialGuard } from './common/core/guards';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      mode: 'md',
+    }),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
   ],

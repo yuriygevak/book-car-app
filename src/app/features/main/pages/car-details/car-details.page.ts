@@ -3,8 +3,11 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { CarDetails } from '../../models';
+import { Navigation } from '../../../../common/core/models';
+import { advantages } from './constants/advantages';
 
 @Component({
   selector: 'app-car-details',
@@ -13,28 +16,7 @@ import { CarDetails } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarDetailsPage implements OnInit {
-  advantages: {name: string; iconName: string; }[] = [
-    {
-      name: 'Free WiFi',
-      iconName: 'wifi',
-    },
-    {
-      name: 'Coffee',
-      iconName: 'cafe',
-    },
-    {
-      name: 'Pets',
-      iconName: 'paw',
-    },
-    {
-      name: 'Bar',
-      iconName: 'wine',
-    },
-    {
-      name: 'Air',
-      iconName: 'snow',
-    },
-  ];
+  advantages: Navigation[] = advantages;
   // todo: should be dynamically from BE by ID of car
   carDetails: CarDetails = {
     name: 'Mercedes-Benz S-Class Limousine',
@@ -56,14 +38,15 @@ export class CarDetailsPage implements OnInit {
   ];
   showDescription = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.getRateingStars();
   }
 
-  bookCar(): void {
+  goToBooking(): void {
     // todo
+    this.router.navigate(['/booking']);
   }
 
   getRateingStars(): void {
@@ -79,6 +62,10 @@ export class CarDetailsPage implements OnInit {
           ? halfStarClassName
           : emptyStarClassName;
     }
+  }
+
+  goToGallery(): void {
+    this.router.navigate(['/gallery']);
   }
 
   toggleDescription(): void {

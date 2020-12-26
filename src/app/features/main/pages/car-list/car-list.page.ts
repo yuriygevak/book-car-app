@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { CarInfo } from '../../models';
 import { tabs } from '../../../../common/core/constants';
-import { Tab } from '../../../../common/core/models';
+import { Navigation } from '../../../../common/core/models';
 
 @Component({
   selector: 'app-car-list',
@@ -42,7 +42,7 @@ export class CarListPage implements OnInit {
       price: 150,
     },
   ];
-  tabs: Tab[] = tabs;
+  tabs: Navigation[] = tabs;
 
   constructor() { }
 

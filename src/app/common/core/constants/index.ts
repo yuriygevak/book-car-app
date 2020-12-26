@@ -1,2 +1,2 @@
-export * from './onboard-tutorial.constant';
+export * from './payment-methods';
 export * from './tabs';

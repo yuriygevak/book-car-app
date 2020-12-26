@@ -22,8 +22,20 @@ const routes: Routes = [
         loadChildren: () => import('./pages/car-details/car-details.module').then( m => m.CarDetailsPageModule)
       },
       {
+        path: 'gallery',
+        loadChildren: () => import('./pages/gallery/gallery.module').then( m => m.GalleryPageModule)
+      },
+      {
         path: 'booking',
         loadChildren: () => import('./pages/booking/booking.module').then( m => m.BookingPageModule)
+      },
+      {
+        path: 'payment',
+        loadChildren: () => import('./pages/payment/payment.module').then( m => m.PaymentPageModule)
+      },
+      {
+        path: 'congratulations',
+        loadChildren: () => import('./pages/congratulations/congratulations.module').then( m => m.CongratulationsPageModule)
       },
     ]
   },
@@ -32,6 +44,7 @@ const routes: Routes = [
     redirectTo: 'car-list',
     pathMatch: 'full'
   },
+
 ];
 
 @NgModule({

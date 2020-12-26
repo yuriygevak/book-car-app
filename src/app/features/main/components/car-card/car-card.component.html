@@ -1,11 +1,11 @@
-<ion-card mode="md">
+<ion-card>
   <div class="card-image-wrapper" (click)="viewCarDetails()">
     <ion-img src="{{ car.imgPath }}"></ion-img>
     <div class="gradient-block"></div>
-    <ion-card-header mode="md" class="card-header">
+    <ion-card-header class="card-header">
       <ion-card-title class="card-title">
         <div class="title-part car-name">{{ car.name }}</div>
-        <div class="title-part car-price">from &#36; {{ car.price }}</div>
+        <div class="title-part car-price">from CAD {{ car.price }}</div>
       </ion-card-title>
       <ion-card-subtitle class="card-subtitle">
         <div class="title-part car-class">{{ car.class }}</div>
@@ -13,13 +13,12 @@
       </ion-card-subtitle>
     </ion-card-header>
   </div>
-  <ion-card-content mode="md" class="card-content">
+  <ion-card-content class="card-content">
     <div class="flag-wrapper" (click)="flagCar()">
       <img src="assets/icons/flag-icon.svg">
       <span class="flag-text">Save</span>
     </div>
     <ion-button class="orange-btn card-btn"
-                mode="md"
                 expand="block"
                 (click)="goToBooking()">Book Now</ion-button>
   </ion-card-content>

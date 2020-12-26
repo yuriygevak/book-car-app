@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="page-title">gallery</ion-title>
+    <app-back-link [color]="'grey'"></app-back-link>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="page-content">
+    <h2 class="page-subtitle">{{ carName }}</h2>
+    <ion-card *ngFor="let image of carImages">
+      <ion-img [src]="image"></ion-img>
+    </ion-card>
+  </div>
+</ion-content>

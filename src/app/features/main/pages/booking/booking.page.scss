@@ -1,0 +1,33 @@
+@import '../../../../../styles/variables';
+
+.back-link-wrap {
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  z-index: 10;
+
+  .back-link {
+    height: 24px;
+    width: 24px;
+  }
+}
+
+.booking-form {
+  .form-subtitle {
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+
+  .form-control-icon {
+    height: 18px;
+    width: 18px;
+    color: $grey-bg;
+  }
+}
+
+.calendar-modal {
+  width: 90%;
+}

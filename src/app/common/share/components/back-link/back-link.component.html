@@ -1,0 +1,9 @@
+<div class="back-link-wrap"
+     [ngStyle]="topPosition && {'top': topPosition + 'px', 'transform': 'translateY(0)'}"
+     (click)="navigateBack()">
+  <ion-icon
+    name="chevron-back-outline"
+    class="back-link"
+    [ngStyle]="{'color': iconColor, 'top': topPosition ? topPosition : '50%'}"
+  ></ion-icon>
+</div>

@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 
 import { Storage } from '@ionic/storage';
 
-import { slides } from '../../../../common/core/constants';
-import { Slide } from '../../../../common/core/models';
+import { slides } from '../../constants';
+import { Slide } from '../../models';
 
 @Component({
   selector: 'app-onboard-launch',

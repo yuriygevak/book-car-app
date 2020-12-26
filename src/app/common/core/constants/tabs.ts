@@ -1,6 +1,6 @@
-import { Tab } from '../models';
+import { Navigation } from '../models';
 
-export const tabs: Tab[] = [
+export const tabs: Navigation[] = [
   {
     icon: 'home',
     link: '/car-list',
