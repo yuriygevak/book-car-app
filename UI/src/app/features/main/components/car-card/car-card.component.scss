@@ -1,0 +1,87 @@
+@import '../../../../../styles/variables';
+
+.card-image-wrapper {
+  position: relative;
+
+  .gradient-block {
+    background-image: linear-gradient(180deg, rgba(82, 87, 122, 0.0001) 0%, #000000 200%);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .card-header {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .card-title, .card-subtitle {
+      display: flex;
+      align-items: flex-end;
+      color: $white-txt;
+    }
+
+    .card-title {
+      margin-bottom: 8px;
+    }
+
+    .card-subtitle {
+      opacity: .7;
+    }
+
+    .title-part {
+      width: 50%;
+      font-weight: 500;
+    }
+
+    .car-name {
+      font-size: 20px;
+      text-transform: capitalize;
+    }
+
+    .car-class {
+      font-size: 16px;
+      text-transform: lowercase;
+    }
+
+    .car-price {
+      font-size: 14px;
+      text-align: right;
+    }
+
+    .car-price-info {
+      font-size: 12px;
+      text-transform: capitalize;
+      font-weight: 300;
+      text-align: right;
+    }
+  }
+}
+
+.card-content, .flag-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.card-content {
+  justify-content: space-between;
+}
+
+.flag-text {
+  font-size: 14px;
+  color: $orange-txt;
+  margin-left: 4px;
+}
+
+.card-btn {
+  width: 122px;
+  height: 36px;
+  margin: 0;
+  text-transform: capitalize;
+}
