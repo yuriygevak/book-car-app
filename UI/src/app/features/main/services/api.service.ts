@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { CarInfo } from '../models';
+import { CarDetails} from '../pages/car-details/models';
 
 @Injectable()
 export class ApiService {
@@ -14,6 +15,11 @@ export class ApiService {
 
   getCarList(): Observable<CarInfo[]> {
     return this.http.get<CarInfo[]>(`${this.url}/carList`);
+  }
+
+  getCarDetails(id: string): Observable<CarDetails> {
+    const params = { id };
+    return this.http.get<CarDetails>(`${this.url}/carDetails`, { params });
   }
 
 }

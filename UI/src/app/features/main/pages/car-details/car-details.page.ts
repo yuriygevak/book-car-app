@@ -1,11 +1,16 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   OnInit
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { advantages } from './constants';
+import { ApiService } from '../../services';
 import { CarDetails } from './models';
 import { Navigation } from '../../../../common/core/models';
 
@@ -17,18 +22,7 @@ import { Navigation } from '../../../../common/core/models';
 })
 export class CarDetailsPage implements OnInit {
   advantages: Navigation[] = advantages;
-  // todo: should be dynamically from BE by ID of car
-  carDetails: CarDetails = {
-    name: 'Mercedes-Benz S-Class Limousine',
-    description: 'The Mercedes-Benz S-Class, formerly known as Sonderklasse (German for "special class", abbreviated as "S-Klasse"), ' +
-      'is a series of full-size luxury sedans, limousines and armored sedans produced by the German automaker Mercedes-Benz, a division ' +
-      'of German company Daimler AG. The S-Class is the designation for top-of-the-line Mercedes-Benz models and was officially ' +
-      'introduced in 1972 with the W116, and has remained in use ever since. The S-Class is the flagship vehicle for Mercedes-Benz.',
-    email: 'parkplaza@gmail.com',
-    phone: '+91-8729838721',
-    price: 150,
-    rating: 50,
-  };
+  carDetails: CarDetails = null;
   rating: string[] = [
     'star-outline',
     'star-outline',
@@ -38,18 +32,39 @@ export class CarDetailsPage implements OnInit {
   ];
   showDescription = false;
 
-  constructor(private router: Router) { }
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
+  constructor(private apiService: ApiService,
+              private cdr: ChangeDetectorRef,
+              private route: ActivatedRoute,
+              private router: Router) {}
 
   ngOnInit(): void {
-    this.getRateingStars();
+    this.route.data
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
+
+        console.log('data', data);
+
+        const selectedCar = data.selectedCar;
+        this.getSelectedCar(selectedCar.id);
+      });
   }
 
   goToBooking(): void {
-    // todo
+    // todo: pass selected car
     this.router.navigate(['/booking']);
   }
 
-  getRateingStars(): void {
+  goToGallery(): void {
+    this.router.navigate(['/gallery']);
+  }
+
+  toggleDescription(): void {
+    this.showDescription = !this.showDescription;
+  }
+
+  private getRatingStars(): void {
     const starsQty = 5;
     const percentPerItem = 20;
     const fullStarClassName = 'star';
@@ -64,12 +79,13 @@ export class CarDetailsPage implements OnInit {
     }
   }
 
-  goToGallery(): void {
-    this.router.navigate(['/gallery']);
-  }
-
-  toggleDescription(): void {
-    this.showDescription = !this.showDescription;
+  private getSelectedCar(carId: string): void {
+    this.apiService.getCarDetails(carId).subscribe(resp => {
+      console.log('!!!', resp);
+      this.carDetails = resp;
+      this.getRatingStars();
+      this.cdr.markForCheck();
+    });
   }
 
 }

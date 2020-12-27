@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ApiService } from './services';
+import { ApiService, CarStorageService } from './services';
 import { MainComponent } from './containers';
 import { MainRoutingModule } from './main-routing.module';
 
@@ -17,7 +17,8 @@ import { MainRoutingModule } from './main-routing.module';
     MainRoutingModule
   ],
   providers: [
-    ApiService
+    ApiService,
+    CarStorageService
   ]
 })
 export class MainModule { }

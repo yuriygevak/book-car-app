@@ -10,10 +10,10 @@
         </ion-button>
       </section>
       <section class="content-section">
-        <h3 class="car-name">{{ carDetails.name }}</h3>
+        <h3 class="car-name">{{ carDetails?.name }}</h3>
         <div class="car-description-wrapper">
           <p class="car-description"
-             [ngClass]="{'show': showDescription}">{{ carDetails.description }}</p>
+             [ngClass]="{'show': showDescription}">{{ carDetails?.description }}</p>
           <span class="orange-link read-more-link"
                 (click)="toggleDescription()">
             <ng-container *ngIf="!showDescription">
@@ -31,21 +31,21 @@
             <ion-col>
               <div class="col-inner-wrap">
                 <ion-img src="assets/icons/email-icon.svg" class="contact-icon" alt="mail-icon"></ion-img>
-                <span class="contact-text">{{ carDetails.email }}</span>
+                <span class="contact-text">{{ carDetails?.email }}</span>
               </div>
               <div class="col-inner-wrap">
                 <div class="contact-subtitle">
                   Price
                 </div>
                 <div>
-                  <span class="car-price">{{ carDetails.price }} CAD</span> for One Way Trip
+                  <span class="car-price">{{ carDetails?.price }} CAD</span> for One Way Trip
                 </div>
               </div>
             </ion-col>
             <ion-col>
               <div class="col-inner-wrap">
                 <ion-img src="assets/icons/phone-icon.svg" class="contact-icon" alt="mail-icon"></ion-img>
-                <span class="contact-text">{{ carDetails.phone }}</span>
+                <span class="contact-text">{{ carDetails?.phone }}</span>
               </div>
               <div class="col-inner-wrap">
                 <div class="contact-subtitle">

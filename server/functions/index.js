@@ -5,8 +5,6 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-// const serviceAccount = require('../book-car-mobile-firebase-adminsdk-ryfsc-0b27e0bb87.json');
-
 admin.initializeApp({
     credential: admin.credential.cert('../book-car-mobile-firebase-adminsdk-ryfsc-0b27e0bb87.json'),
     databaseURL: "https://book-car-mobile-default-rtdb.europe-west1.firebasedatabase.app"
@@ -36,8 +34,29 @@ app.get('/carList', (req, res) => {
                 status: 500,
                 error: err
             }));
-        })
+        });
+});
 
+app.get('/carDetails', (req, res) => {
+    const carId = req.query.id;
+    admin.firestore().collection('carDetails').get()
+        .then(querySnapshot => {
+            const carsData = querySnapshot.docs.map(doc => doc.data());
+            const selectedCar = carsData.find(car => car.id === carId);
+            if (!selectedCar) {
+                return res.send(JSON.stringify({
+                    status: 500,
+                    error: 'data is empty'
+                }));
+            }
+            return res.send(JSON.stringify(selectedCar));
+        })
+        .catch(err => {
+            return res.send(JSON.stringify({
+                status: 500,
+                error: err
+            }));
+        });
 });
 
 exports.expressApp = functions.https.onRequest(app);

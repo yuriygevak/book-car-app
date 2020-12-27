@@ -7,6 +7,7 @@ import {
 import { Router } from '@angular/router';
 
 import { CarInfo } from '../../models';
+import { CarStorageService } from '../../services';
 
 @Component({
   selector: 'app-car-card',
@@ -17,7 +18,8 @@ import { CarInfo } from '../../models';
 export class CarCardComponent implements OnInit {
   @Input() car: CarInfo;
 
-  constructor(private router: Router) { }
+  constructor(private carStorageService: CarStorageService,
+              private router: Router) { }
 
   ngOnInit(): void {}
 
@@ -26,11 +28,16 @@ export class CarCardComponent implements OnInit {
   }
 
   goToBooking(): void {
+    this.selectCar();
     this.router.navigate(['/booking']);
   }
 
+  selectCar(): void {
+    this.carStorageService.setStoredCar(this.car);
+  }
+
   viewCarDetails(): void {
-    // todo
+    this.selectCar();
     this.router.navigate(['/car-details']);
   }
 

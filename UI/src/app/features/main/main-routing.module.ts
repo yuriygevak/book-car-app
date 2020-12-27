@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { CarResolver } from './resolvers';
 import { MainComponent } from './containers';
 
 const routes: Routes = [
@@ -19,15 +20,18 @@ const routes: Routes = [
       },
       {
         path: 'car-details',
-        loadChildren: () => import('./pages/car-details/car-details.module').then( m => m.CarDetailsPageModule)
+        loadChildren: () => import('./pages/car-details/car-details.module').then( m => m.CarDetailsPageModule),
+        resolve: { selectedCar: CarResolver }
       },
       {
         path: 'gallery',
-        loadChildren: () => import('./pages/gallery/gallery.module').then( m => m.GalleryPageModule)
+        loadChildren: () => import('./pages/gallery/gallery.module').then( m => m.GalleryPageModule),
+        resolve: { selectedCar: CarResolver }
       },
       {
         path: 'booking',
-        loadChildren: () => import('./pages/booking/booking.module').then( m => m.BookingPageModule)
+        loadChildren: () => import('./pages/booking/booking.module').then( m => m.BookingPageModule),
+        resolve: { selectedCar: CarResolver }
       },
       {
         path: 'payment',
@@ -49,6 +53,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [CarResolver]
 })
 export class MainRoutingModule {}
