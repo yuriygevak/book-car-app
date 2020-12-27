@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { paymentMethods } from '../../../../common/core/constants';
+import { paymentMethods } from './constants';
 
 @Component({
   selector: 'app-payment',

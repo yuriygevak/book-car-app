@@ -1,11 +1,11 @@
 <ion-card>
   <div class="card-image-wrapper" (click)="viewCarDetails()">
-    <ion-img src="{{ car.imgPath }}"></ion-img>
+    <ion-img src="{{ car.imagePath }}"></ion-img>
     <div class="gradient-block"></div>
     <ion-card-header class="card-header">
       <ion-card-title class="card-title">
         <div class="title-part car-name">{{ car.name }}</div>
-        <div class="title-part car-price">from CAD {{ car.price }}</div>
+        <div class="title-part car-price">from {{ car.price }} CAD</div>
       </ion-card-title>
       <ion-card-subtitle class="card-subtitle">
         <div class="title-part car-class">{{ car.class }}</div>

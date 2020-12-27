@@ -5,9 +5,9 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { CarDetails } from '../../models';
+import { advantages } from './constants';
+import { CarDetails } from './models';
 import { Navigation } from '../../../../common/core/models';
-import { advantages } from './constants/advantages';
 
 @Component({
   selector: 'app-car-details',

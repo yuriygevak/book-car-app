@@ -64,3 +64,7 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+# acc creds
+book-car-mobile-firebase-adminsdk-ryfsc-0b27e0bb87.json
+book-car-mobile-e5ef69e343ec.json

@@ -1,4 +1,4 @@
-import { Navigation } from '../models';
+import { Navigation } from '../../../../../common/core/models';
 
 export const paymentMethods: Navigation[] = [
   {

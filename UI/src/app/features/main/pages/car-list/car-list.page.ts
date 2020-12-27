@@ -1,8 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit
+} from '@angular/core';
 
+import { ApiService } from '../../services';
 import { CarInfo } from '../../models';
-import { tabs } from '../../../../common/core/constants';
 import { Navigation } from '../../../../common/core/models';
+import { tabs } from '../../../../common/core/constants';
 
 @Component({
   selector: 'app-car-list',
@@ -12,41 +18,17 @@ import { Navigation } from '../../../../common/core/models';
 })
 export class CarListPage implements OnInit {
   // TODO: should get from firebase
-  carList: CarInfo[] = [
-    {
-      class: 'luxury class',
-      imgPath: 'assets/icons/car-1.png',
-      id: '1',
-      name: 'Mercedes-Benz S-Class Limousine',
-      price: 150,
-    },
-    {
-      class: 'luxury class',
-      imgPath: 'assets/icons/car-2.png',
-      id: '2',
-      name: 'Kia Carnival Hi-Limousine',
-      price: 150,
-    },
-    {
-      class: 'luxury class',
-      imgPath: 'assets/icons/car-1.png',
-      id: '3',
-      name: 'Mercedes-Benz S-Class Limousine',
-      price: 150,
-    },
-    {
-      class: 'luxury class',
-      imgPath: 'assets/icons/car-2.png',
-      id: '4',
-      name: 'Kia Carnival Hi-Limousine',
-      price: 150,
-    },
-  ];
+  carList: CarInfo[] = [];
   tabs: Navigation[] = tabs;
 
-  constructor() { }
+  constructor(private apiService: ApiService,
+              private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.apiService.getCarList().subscribe(resp => {
+        this.carList = resp;
+        this.cdr.markForCheck();
+      });
   }
 
 }

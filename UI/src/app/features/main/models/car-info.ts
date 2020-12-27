@@ -1,7 +1,7 @@
 export interface CarInfo {
   class: string;
   id: string;
-  imgPath: string;
+  imagePath: string;
   name: string;
   price: number;
 }
