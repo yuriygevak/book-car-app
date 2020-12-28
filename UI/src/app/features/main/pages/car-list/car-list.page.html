@@ -7,8 +7,15 @@
 </ion-header>
 
 <ion-content>
-  <ng-container *ngFor="let car of carList">
-    <app-car-card [car]="car"></app-car-card>
+  <ion-spinner *ngIf="showSpinner"
+               name="lines"
+               class="spinner"
+  ></ion-spinner>
+
+  <ng-container *ngIf="!showSpinner">
+    <app-car-card *ngFor="let car of carList"
+                  [car]="car"
+    ></app-car-card>
   </ng-container>
 </ion-content>
 

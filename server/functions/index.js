@@ -5,12 +5,17 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+const projectId = 'book-car-mobile';
+
 admin.initializeApp({
-    credential: admin.credential.cert('../book-car-mobile-firebase-adminsdk-ryfsc-0b27e0bb87.json'),
-    databaseURL: "https://book-car-mobile-default-rtdb.europe-west1.firebasedatabase.app"
+    credential: admin.credential.cert(`../${projectId}-firebase-adminsdk-ryfsc-0b27e0bb87.json`),
+    databaseURL: `https://${projectId}-default-rtdb.europe-west1.firebasedatabase.app`
 });
 
-const storage = admin.storage();
+// const storage = admin.storage();
+const bucketName = `${projectId}.appspot.com`;
+// const bucket = storage.bucket(bucketName);
+const bucketUrl = `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/`
 
 const app = express();
 
@@ -27,13 +32,16 @@ app.get('/carList', (req, res) => {
                     error: 'data is empty'
                 }));
             }
+
+            carListData.forEach(car => {
+               car.imageUrl =`${bucketUrl}${encodeURIComponent(car.storagePath)}?alt=media`;
+               delete car['storagePath'];
+            });
+
             return res.send(JSON.stringify(carListData));
         })
         .catch(err => {
-            return res.send(JSON.stringify({
-                status: 500,
-                error: err
-            }));
+            return res.send(err);
         });
 });
 
@@ -49,13 +57,12 @@ app.get('/carDetails', (req, res) => {
                     error: 'data is empty'
                 }));
             }
+            selectedCar.imageUrl = `${bucketUrl}${encodeURIComponent(selectedCar.storagePath)}?alt=media`;
+            delete selectedCar['storagePath'];
             return res.send(JSON.stringify(selectedCar));
         })
         .catch(err => {
-            return res.send(JSON.stringify({
-                status: 500,
-                error: err
-            }));
+            return res.send(err);
         });
 });
 

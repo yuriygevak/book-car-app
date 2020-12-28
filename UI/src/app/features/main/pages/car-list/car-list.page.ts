@@ -17,18 +17,20 @@ import { tabs } from '../../../../common/core/constants';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarListPage implements OnInit {
-  // TODO: should get from firebase
   carList: CarInfo[] = [];
+  showSpinner = false;
   tabs: Navigation[] = tabs;
 
   constructor(private apiService: ApiService,
               private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.showSpinner = true;
     this.apiService.getCarList().subscribe(resp => {
-        this.carList = resp;
-        this.cdr.markForCheck();
-      });
+      this.carList = resp;
+      this.showSpinner = false;
+      this.cdr.markForCheck();
+    });
   }
 
 }

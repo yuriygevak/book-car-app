@@ -2,7 +2,7 @@ export interface CarDetails {
   description: string;
   email: string;
   id: string;
-  imagePath: string;
+  imageUrl: string;
   name: string;
   phone: string;
   price: number;

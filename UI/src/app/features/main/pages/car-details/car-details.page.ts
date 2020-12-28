@@ -31,6 +31,7 @@ export class CarDetailsPage implements OnInit {
     'star-outline'
   ];
   showDescription = false;
+  showSpinner = false;
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -40,12 +41,10 @@ export class CarDetailsPage implements OnInit {
               private router: Router) {}
 
   ngOnInit(): void {
+    this.showSpinner = true;
     this.route.data
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
-
-        console.log('data', data);
-
         const selectedCar = data.selectedCar;
         this.getSelectedCar(selectedCar.id);
       });
@@ -79,11 +78,11 @@ export class CarDetailsPage implements OnInit {
     }
   }
 
-  private getSelectedCar(carId: string): void {
-    this.apiService.getCarDetails(carId).subscribe(resp => {
-      console.log('!!!', resp);
+  getSelectedCar(carId: string): void {
+    this.apiService.getCarDetails(carId).subscribe(async resp => {
       this.carDetails = resp;
       this.getRatingStars();
+      this.showSpinner = false;
       this.cdr.markForCheck();
     });
   }

@@ -1,4 +1,8 @@
 /* ion-button */
+ion-button {
+  margin: 0;
+}
+
 .orange-btn {
   --background: #ff5800;
   --border-radius: 4px;
@@ -47,4 +51,15 @@
 /* form */
 .sc-ion-textarea-md-h {
   margin-top: 0;
+}
+
+/* spinner */
+.spinner {
+  width: 60px;
+  height: 60px;
+  color: $orange-bg;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

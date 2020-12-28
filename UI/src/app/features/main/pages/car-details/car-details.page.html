@@ -1,8 +1,14 @@
 <ion-content>
-  <div class="car-details-page">
-    <app-back-link [topPosition]="14"></app-back-link>
+  <ion-spinner *ngIf="showSpinner"
+               name="lines"
+               class="spinner"
+  ></ion-spinner>
+
+  <div *ngIf="!showSpinner" class="car-details-page">
     <div>
-      <section class="image-wrapper" style="background-image: url('assets/icons/car-1.png')">
+      <app-back-link [topPosition]="14"></app-back-link>
+      <section class="image-wrapper"
+               [ngStyle]="{'background-image': 'url(' + carDetails?.imageUrl + ')'}">
         <ion-button class="orange-btn car-gallery-btn"
                     (click)="goToGallery()">
           Gallery
@@ -54,7 +60,7 @@
                 <div>
                   <span class="car-price">
                     <ng-container *ngFor="let rate of rating">
-                      <ion-icon [name]="rate" class="rate-star-icon" class="orange-icon"></ion-icon>
+                      <ion-icon [name]="rate" class="rate-star-icon orange-icon"></ion-icon>
                     </ng-container>
                   </span>
                 </div>
@@ -80,7 +86,7 @@
                   (click)="goToBooking()">
         Book Now
       </ion-button>
-      <div class="flag-wrapper align-xy-center">
+      <div class="flag-wrapper">
         <ion-img src="assets/icons/flag-icon.svg" alt="save-car-icon"></ion-img>
       </div>
     </section>

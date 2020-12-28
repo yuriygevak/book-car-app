@@ -75,7 +75,7 @@
             ></ion-input>
           </ion-item>
         </div>
-        <ion-button class="orange-btn"
+        <ion-button class="orange-btn book-form-btn"
                     (click)="openCalendar()">Select Time</ion-button>
         <div class="form-control">
           <ion-icon name="calendar" class="form-control-icon"></ion-icon>
@@ -113,7 +113,9 @@
 <!--        </div>-->
       </div>
 
-      <ion-button class="orange-btn" (click)="submitForm()">Book Now</ion-button>
+      <ion-button class="orange-btn book-form-btn"
+                  (click)="submitForm()"
+      >Book Now</ion-button>
 
     </form>
   </div>
