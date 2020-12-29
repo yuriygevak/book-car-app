@@ -34,8 +34,10 @@ app.get('/carList', (req, res) => {
             }
 
             carListData.forEach(car => {
-               car.imageUrl =`${bucketUrl}${encodeURIComponent(car.storagePath)}?alt=media`;
-               delete car['storagePath'];
+                car.imageUrl = setImageUrl(car.imageUrl);
+                car.gallery = car.gallery.map(imagePath => {
+                   return setImageUrl(imagePath);
+               });
             });
 
             return res.send(JSON.stringify(carListData));
@@ -57,8 +59,7 @@ app.get('/carDetails', (req, res) => {
                     error: 'data is empty'
                 }));
             }
-            selectedCar.imageUrl = `${bucketUrl}${encodeURIComponent(selectedCar.storagePath)}?alt=media`;
-            delete selectedCar['storagePath'];
+            selectedCar.imageUrl = setImageUrl(selectedCar.imageUrl);
             return res.send(JSON.stringify(selectedCar));
         })
         .catch(err => {
@@ -67,3 +68,7 @@ app.get('/carDetails', (req, res) => {
 });
 
 exports.expressApp = functions.https.onRequest(app);
+
+function setImageUrl(storagePath) {
+    return `${bucketUrl}${encodeURIComponent(storagePath)}?alt=media`;
+}

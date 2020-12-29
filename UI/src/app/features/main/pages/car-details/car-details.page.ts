@@ -46,7 +46,7 @@ export class CarDetailsPage implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         const selectedCar = data.selectedCar;
-        this.getSelectedCar(selectedCar.id);
+        this.getCarDetails(selectedCar.id);
       });
   }
 
@@ -78,10 +78,11 @@ export class CarDetailsPage implements OnInit {
     }
   }
 
-  getSelectedCar(carId: string): void {
+  private getCarDetails(carId: string): void {
     this.apiService.getCarDetails(carId).subscribe(async resp => {
       this.carDetails = resp;
       this.getRatingStars();
+
       this.showSpinner = false;
       this.cdr.markForCheck();
     });

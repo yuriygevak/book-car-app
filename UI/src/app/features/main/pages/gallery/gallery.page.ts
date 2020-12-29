@@ -1,8 +1,14 @@
 import {
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component,
   OnInit
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+import { CarInfo } from '../../models';
 
 @Component({
   selector: 'app-gallery',
@@ -12,17 +18,25 @@ import {
 })
 export class GalleryPage implements OnInit {
   carName = 'car name';
-  // todo: should be from BE
-  carImages: string[] = [
-    'assets/images/cadillac_escalade_1.jpg',
-    'assets/images/cadillac_escalade_2.jpg',
-    'assets/images/cadillac_escalade_3.jpg',
-    'assets/images/cadillac_escalade_4.jpg',
-  ];
+  carImages: string[] = [];
+  showSpinner = false;
 
-  constructor() { }
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
+  constructor(private cdr: ChangeDetectorRef,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.showSpinner = true;
+    this.route.data
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
+        const selectedCar: CarInfo = data.selectedCar;
+        this.carImages = selectedCar.gallery;
+        this.carName = selectedCar.name;
+        this.showSpinner = false;
+        this.cdr.markForCheck();
+      });
   }
 
 }
