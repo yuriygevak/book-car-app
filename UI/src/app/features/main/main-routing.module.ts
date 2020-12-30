@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CarResolver } from './resolvers';
+import { BookingDetailsResolver, CarResolver } from './resolvers';
 import { MainComponent } from './containers';
+import { PaymentGuard } from './guards';
 
 const routes: Routes = [
   {
@@ -31,11 +32,16 @@ const routes: Routes = [
       {
         path: 'booking',
         loadChildren: () => import('./pages/booking/booking.module').then( m => m.BookingPageModule),
-        resolve: { selectedCar: CarResolver }
+        resolve: { bookingDetails: BookingDetailsResolver }
       },
       {
         path: 'payment',
-        loadChildren: () => import('./pages/payment/payment.module').then( m => m.PaymentPageModule)
+        loadChildren: () => import('./pages/payment/payment.module').then( m => m.PaymentPageModule),
+        canLoad: [PaymentGuard],
+        resolve: {
+          bookingDetails: BookingDetailsResolver,
+          selectedCar: CarResolver
+        },
       },
       {
         path: 'congratulations',
@@ -54,6 +60,9 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [CarResolver]
+  providers: [
+    BookingDetailsResolver,
+    CarResolver
+  ]
 })
 export class MainRoutingModule {}

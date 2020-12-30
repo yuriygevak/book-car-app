@@ -1,20 +1,20 @@
 import {
   ChangeDetectionStrategy,
-  Component, ElementRef,
+  Component,
+  ElementRef,
   OnInit,
   ViewChild
 } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  Validators
-} from '@angular/forms';
-import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ModalController } from '@ionic/angular';
 
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+
+import { BookingDetailsStorageService } from '../../services';
+import { BookingDetails } from '../../models';
 import { CalendarModalComponent } from '../../modals';
 import { setFormState } from '../../../../common/core/utils';
 
@@ -27,38 +27,43 @@ import { setFormState } from '../../../../common/core/utils';
 export class BookingPage implements OnInit {
   form: FormGroup;
   phoneRegex = '(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,4})';
-  price: {oneWay: number; return: number} = {oneWay: 1, return: 2};
   selectedTime: Date = null;
   showFormError = false;
-  tripArrivals: string[] = [];
-  trips: FormArray;
   @ViewChild('bookingTitle', {static: false}) titleEl: ElementRef;
 
-  constructor(private formBuilder: FormBuilder,
-              private location: Location,
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
+  constructor(private bookingDetailsStorageService: BookingDetailsStorageService,
+              private formBuilder: FormBuilder,
               public modalController: ModalController,
+              private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit(): void {
-    this.initForm();
-  }
-
-  navigateBack(): void {
-    this.location.back();
+    this.route.data
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
+        const bookingDetails: BookingDetails = data.bookingDetails;
+        this.initForm();
+        if (bookingDetails) {
+          this.form.patchValue(bookingDetails, {emitEvent: false});
+        }
+      });
   }
 
   submitForm(): void {
-    // if (!this.form.valid) {
-    //   setFormState(this.form.controls['contacts']);
-    //   setFormState(this.form.controls['trip']);
-    //   this.showFormError = true;
-    //   setTimeout(() => {
-    //     this.showFormError = false;
-    //   }, 1000);
-    // } else {
-    //   this.router.navigate(['/payment']);
-    // }
-    this.router.navigate(['/payment']);
+    if (!this.form.valid) {
+      setFormState(this.form.controls['contacts']);
+      setFormState(this.form.controls['trip']);
+      this.showFormError = true;
+      this.titleEl.nativeElement.scrollIntoView({behavior: 'smooth'});
+      setTimeout(() => {
+        this.showFormError = false;
+      }, 1000);
+    } else {
+      this.bookingDetailsStorageService.setStoredBookingDetails(this.form.value);
+      this.router.navigate(['/payment']);
+    }
   }
 
   async openCalendar() {
@@ -71,7 +76,7 @@ export class BookingPage implements OnInit {
 
     modal.onDidDismiss()
       .then((modalData) => {
-        this.form.get('trip').get('date').patchValue(modalData.data?.selectedTime, {emitEvent: false});
+        this.form.get('date').patchValue(modalData.data?.selectedTime, {emitEvent: false});
         this.selectedTime = modalData.data?.selectedTime;
       });
     return await modal.present();
@@ -79,21 +84,15 @@ export class BookingPage implements OnInit {
 
   private initForm(): void {
     this.form = this.formBuilder.group({
-      contacts: this.formBuilder.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        phone: ['', [Validators.required, Validators.pattern(this.phoneRegex)]],
-        email: ['', [Validators.required, Validators.email]],
-      }),
-      trip: this.formBuilder.group({
-        arrival: [null, Validators.required],
-        dropOff: [null, Validators.required],
-        date: [null, Validators.required],
-        flight: '',
-        notes: '',
-      }),
-      // todo: no need for demo
-      // agreeCheck: [false, Validators.required]
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern(this.phoneRegex)]],
+      email: ['', [Validators.required, Validators.email]],
+      arrival: [null, Validators.required],
+      dropOff: [null, Validators.required],
+      date: [null, Validators.required],
+      flight: '',
+      notes: '',
     });
   }
 

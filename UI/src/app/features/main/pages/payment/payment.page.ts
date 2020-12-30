@@ -3,8 +3,13 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+import { BookingDetails, CarInfo } from '../../models';
+import { ApiService, BookingDetailsStorageService } from '../../services';
 import { paymentMethods } from './constants';
 
 @Component({
@@ -14,18 +19,33 @@ import { paymentMethods } from './constants';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaymentPage implements OnInit {
-  // todo: amount should be from BE
-  amount = 150;
+  bookingDetails: BookingDetails = new BookingDetails();
+  carDetails: CarInfo = new CarInfo();
   paymentMethods = paymentMethods;
+  objectKeys = Object.keys;
 
-  constructor(private router: Router) { }
+  private destroy$: Subject<boolean> = new Subject<boolean>();
+
+  constructor(private apiService: ApiService,
+              private route: ActivatedRoute,
+              private bookingDetailsStorageService: BookingDetailsStorageService,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.route.data
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => {
+        this.bookingDetails = data.bookingDetails;
+        this.carDetails = data.selectedCar;
+      });
   }
 
   choosePayMethod(): void {
-    // todo: just skip method go to congratulations page
-    this.router.navigate(['/congratulations']);
+    // todo: just skip payment and save booking details and go to congratulations page
+    this.apiService.saveBooking(this.bookingDetails, this.carDetails.id).subscribe(resp => {
+      this.bookingDetailsStorageService.setStoredBookingDetails(null);
+      this.router.navigate(['/congratulations']);
+    });
   }
 
 }

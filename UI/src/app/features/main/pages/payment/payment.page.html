@@ -8,8 +8,9 @@
 <ion-content>
   <div class="page-content">
     <h2 class="page-subtitle">Amount to be paid</h2>
-    <h3 class="amount">{{ amount }} CAD</h3>
+    <h3 class="amount">{{ carDetails.price }} CAD</h3>
 
+    <p class="payment-text ion-margin-bottom">Choose a payment method</p>
     <ion-list>
       <ion-item *ngFor="let payment of paymentMethods"
                 class="payment-item"
@@ -19,5 +20,34 @@
         <ion-icon name="chevron-forward-outline" class="payment-arrow"></ion-icon>
       </ion-item>
     </ion-list>
+
+    <ion-list>
+      <ion-list-header class="details-header">
+        Please Check Booking Details
+      </ion-list-header>
+      <ion-item>
+        <ion-label class="details-label">
+          <h2>Car</h2>
+          <h3>{{ carDetails.name }}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label class="details-label">
+          <h2>Car class</h2>
+          <h3>{{ carDetails.class }}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item *ngFor="let key of objectKeys(bookingDetails)">
+        <ion-label class="details-label">
+          <h2>
+            <ng-container *ngIf="key !== 'firstName' && key !== 'lastName'">{{ key }}</ng-container>
+            <ng-container *ngIf="key === 'firstName'">first name</ng-container>
+            <ng-container *ngIf="key === 'lastName'">last name</ng-container>
+          </h2>
+          <h3>{{ bookingDetails[key] }}</h3>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
   </div>
 </ion-content>

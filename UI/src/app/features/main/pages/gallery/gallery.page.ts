@@ -1,5 +1,6 @@
 import {
-  ChangeDetectionStrategy, ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   OnInit
 } from '@angular/core';
@@ -17,7 +18,7 @@ import { CarInfo } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GalleryPage implements OnInit {
-  carName = 'car name';
+  carName = '';
   carImages: string[] = [];
   showSpinner = false;
 

@@ -67,6 +67,14 @@ app.get('/carDetails', (req, res) => {
         });
 });
 
+app.post('/saveBooking', (req, res) => {
+    const booking = req.body;
+    admin.database().ref('/bookings').push(booking)
+        .then(() => {
+            return res.send(JSON.stringify({message: 'Booking was saved'}));
+        });
+});
+
 exports.expressApp = functions.https.onRequest(app);
 
 function setImageUrl(storagePath) {

@@ -6,7 +6,7 @@
 </ion-header>
 <ion-content>
   <div class="page-content">
-    <h2 class="page-subtitle">Booking Details</h2>
+    <h2 class="page-subtitle" #bookingTitle>Booking Details</h2>
 
     <ng-container *ngIf="showFormError">
       <ion-text color="danger">
@@ -15,107 +15,97 @@
     </ng-container>
 
     <form [formGroup]="form" class="booking-form ion-margin-top">
-      <div formGroupName="contacts">
-        <h3 class="form-subtitle ion-text-center">Contact Information</h3>
-        <div class="form-control">
-          <ion-icon name="person" class="form-control-icon"></ion-icon>
-          <ion-item>
-            <ion-input type="text"
-                       formControlName="firstName"
-                       placeholder="First Name *"
-            ></ion-input>
-          </ion-item>
-        </div>
-        <div class="form-control">
-          <ion-icon name="person" class="form-control-icon"></ion-icon>
-          <ion-item>
-            <ion-input type="text"
-                       formControlName="lastName"
-                       placeholder="Last Name *"
-            ></ion-input>
-          </ion-item>
-        </div>
-        <div class="form-control">
-          <ion-icon name="call" class="form-control-icon"></ion-icon>
-          <ion-item>
-            <ion-input type="tel"
-                       formControlName="phone"
-                       placeholder="Phone *"
-            ></ion-input>
-          </ion-item>
-        </div>
-        <div class="form-control">
-          <ion-icon name="mail" class="form-control-icon"></ion-icon>
-          <ion-item>
-            <ion-input type="email"
-                       formControlName="email"
-                       placeholder="Email *"
-            ></ion-input>
-          </ion-item>
-        </div>
+      <h3 class="form-subtitle ion-text-center ion-margin-bottom">Contact Information</h3>
+      <div class="form-control">
+        <ion-icon name="person" class="form-control-icon"></ion-icon>
+        <ion-item>
+          <ion-input type="text"
+                     formControlName="firstName"
+                     placeholder="First Name *"
+          ></ion-input>
+        </ion-item>
+      </div>
+      <div class="form-control">
+        <ion-icon name="person" class="form-control-icon"></ion-icon>
+        <ion-item>
+          <ion-input type="text"
+                     formControlName="lastName"
+                     placeholder="Last Name *"
+          ></ion-input>
+        </ion-item>
+      </div>
+      <div class="form-control">
+        <ion-icon name="call" class="form-control-icon"></ion-icon>
+        <ion-item>
+          <ion-input type="tel"
+                     formControlName="phone"
+                     placeholder="Phone *"
+          ></ion-input>
+        </ion-item>
+      </div>
+      <div class="form-control">
+        <ion-icon name="mail" class="form-control-icon"></ion-icon>
+        <ion-item>
+          <ion-input type="email"
+                     formControlName="email"
+                     placeholder="Email *"
+          ></ion-input>
+        </ion-item>
       </div>
 
-      <div formGroupName="trip">
-        <h3 class="form-subtitle ion-text-center">Trip Information</h3>
-        <div class="form-control">
-          <ion-icon name="location" class="form-control-icon"></ion-icon>
-          <ion-item>
-            <ion-input type="text"
-                       formControlName="arrival"
-                       placeholder="Arrival *"
-            ></ion-input>
-          </ion-item>
-        </div>
-        <div class="form-control">
-          <ion-icon name="location" class="form-control-icon"></ion-icon>
-          <ion-item>
-            <ion-input type="text"
-                       formControlName="dropOff"
-                       placeholder="Drop off *"
-            ></ion-input>
-          </ion-item>
-        </div>
-        <ion-button class="orange-btn book-form-btn"
-                    (click)="openCalendar()">Select Time</ion-button>
-        <div class="form-control">
-          <ion-icon name="calendar" class="form-control-icon"></ion-icon>
-          <ion-item>
-            <ion-input type="text"
-                       formControlName="date"
-                       placeholder="Selected Time*"
-                       readonly
-            ></ion-input>
-          </ion-item>
-        </div>
-        <div class="form-control">
-          <ion-icon name="airplane" class="form-control-icon"></ion-icon>
-          <ion-item>
-            <ion-input type="text"
-                       formControlName="flight"
-                       placeholder="Flight"
-            ></ion-input>
-          </ion-item>
-        </div>
-        <div class="form-control">
-          <ion-icon name="reader" class="form-control-icon"></ion-icon>
-          <ion-item>
-            <ion-textarea rows="1"
-                          formControlName="notes"
-                          placeholder="Notes"
-            ></ion-textarea>
-          </ion-item>
-        </div>
-<!--        <div class="form-control">-->
-<!--          <ion-item>-->
-<!--            <ion-checkbox color="primary"></ion-checkbox>-->
-<!--            <ion-label>Agree with blablabla</ion-label>-->
-<!--          </ion-item>-->
-<!--        </div>-->
+      <h3 class="form-subtitle ion-text-center ion-margin-bottom">Trip Information</h3>
+      <div class="form-control">
+        <ion-icon name="location" class="form-control-icon"></ion-icon>
+        <ion-item>
+          <ion-input type="text"
+                     formControlName="arrival"
+                     placeholder="Arrival *"
+          ></ion-input>
+        </ion-item>
       </div>
-
+      <div class="form-control">
+        <ion-icon name="location" class="form-control-icon"></ion-icon>
+        <ion-item>
+          <ion-input type="text"
+                     formControlName="dropOff"
+                     placeholder="Drop off *"
+          ></ion-input>
+        </ion-item>
+      </div>
       <ion-button class="orange-btn book-form-btn"
-                  (click)="submitForm()"
-      >Book Now</ion-button>
+                  (click)="openCalendar()">Select Time</ion-button>
+      <div class="form-control">
+        <ion-icon name="calendar" class="form-control-icon"></ion-icon>
+        <ion-item>
+          <ion-input type="text"
+                     formControlName="date"
+                     placeholder="Selected Time*"
+                     readonly
+          ></ion-input>
+        </ion-item>
+      </div>
+      <div class="form-control">
+        <ion-icon name="airplane" class="form-control-icon"></ion-icon>
+        <ion-item>
+          <ion-input type="text"
+                     formControlName="flight"
+                     placeholder="Flight"
+          ></ion-input>
+        </ion-item>
+      </div>
+      <div class="form-control">
+        <ion-icon name="reader" class="form-control-icon"></ion-icon>
+        <ion-item>
+          <ion-textarea rows="1"
+                        formControlName="notes"
+                        placeholder="Notes"
+          ></ion-textarea>
+        </ion-item>
+      </div>
+
+      <ion-button class="orange-btn book-form-btn" (click)="submitForm()">
+        Book Now
+      </ion-button>
 
     </form>
   </div>

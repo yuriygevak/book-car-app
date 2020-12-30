@@ -3,9 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ApiService, CarStorageService } from './services';
+import {
+  ApiService,
+  BookingDetailsStorageService,
+  CarStorageService
+} from './services';
 import { MainComponent } from './containers';
 import { MainRoutingModule } from './main-routing.module';
+import { PaymentGuard } from './guards';
 
 @NgModule({
   declarations: [
@@ -18,7 +23,9 @@ import { MainRoutingModule } from './main-routing.module';
   ],
   providers: [
     ApiService,
-    CarStorageService
+    BookingDetailsStorageService,
+    CarStorageService,
+    PaymentGuard
   ]
 })
 export class MainModule { }

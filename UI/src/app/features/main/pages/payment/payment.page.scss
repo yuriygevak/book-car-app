@@ -5,6 +5,11 @@
   margin: 24px auto 32px;
 }
 
+.payment-text {
+  font-size: 18px;
+  font-weight: 500;
+}
+
 .payment-item {
   display: flex;
   align-items: center;
@@ -27,5 +32,22 @@
     top: 50%;
     transform: translateY(-50%);
     right: 0;
+  }
+}
+
+.details-header {
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.details-label {
+  text-transform: capitalize;
+
+  h2 {
+    font-size: 14px;
+  }
+
+  h3 {
+    font-weight: 600;
   }
 }

@@ -1,0 +1,13 @@
+@mixin disableAutoFill($bg-color) {
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px $bg-color inset;
+  }
+
+  &:-webkit-autofill {
+    &:hover,
+    &:focus,
+    &:active {
+      -webkit-box-shadow: 0 0 0 1000px $bg-color inset;
+    }
+  }
+}

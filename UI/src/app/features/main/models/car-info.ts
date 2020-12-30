@@ -1,4 +1,4 @@
-export interface CarInfo {
+export class CarInfo {
   class: string;
   gallery: string[];
   id: string;
