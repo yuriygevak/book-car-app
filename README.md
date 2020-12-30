@@ -7,13 +7,11 @@ Images are located in firebase Storage.
 
 To run the app locally you need run separately server and UI.
 To start server locally you need to paste inside '/server' directory 
-'book-car-mobile-e5ef69e343ec.json' and 'book-car-mobile-firebase-adminsdk-ryfsc-0b27e0bb87.json' files (need to request them).
+'_book-car-mobile-e5ef69e343ec.json_' and '_book-car-mobile-firebase-adminsdk-ryfsc-0b27e0bb87.json_' files (need to request them).
 
-Then both in '/server' and '/server/functions' directories run
-- 'npm i'.
-Finally, inside '/server' folder execute in terminal command 
-- 'firebase emulators:start --only functions'.
-To run UI part locally you need to run inside '/UI' directory commands:
-- 'npm i'
-- 'ionic serve'
+Then both in '_/server_' and '_/server/functions_' directories run **`npm i`**.
+Finally, inside '_/server_' folder execute in terminal command firebase **`emulators:start --only functions`**.
+To run UI part locally you need to run inside '_/UI_' directory commands: 
+- **`npm i`**
+- **`ionic serve`**
 
