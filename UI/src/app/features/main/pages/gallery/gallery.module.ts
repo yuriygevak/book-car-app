@@ -8,17 +8,19 @@ import { GalleryPageRoutingModule } from './gallery-routing.module';
 
 import { BackLinkModule } from '../../../../common/share/components/back-link/back-link.module';
 import { GalleryPage } from './gallery.page';
+import { TabBarModule } from '../../../../common/share/components/tab-bar/tap-bar.module';
 
 @NgModule({
   declarations: [
     GalleryPage,
   ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    GalleryPageRoutingModule,
-    BackLinkModule,
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        GalleryPageRoutingModule,
+        BackLinkModule,
+        TabBarModule,
+    ],
 })
 export class GalleryPageModule {}

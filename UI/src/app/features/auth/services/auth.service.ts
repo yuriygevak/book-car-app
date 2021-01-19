@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/auth';
-// import firebase, { User as FirebaseUser } from '@firebase';
 import firebase from 'firebase';
 import { Observable } from 'rxjs';
+import { Storage } from '@ionic/storage';
 
 import { StorageUser, User } from '../../../common/core/models';
 
@@ -11,22 +11,23 @@ import { StorageUser, User } from '../../../common/core/models';
 export class AuthService {
   currentUser: StorageUser = null;
 
-  constructor(public firebaseAuth: AngularFireAuth) {
+  constructor(public firebaseAuth: AngularFireAuth,
+              private storage: Storage) {
     // TODO: add type for user
-    this.firebaseAuth.authState.subscribe((user: firebase.User) => {
-      if (user) {
-        this.currentUser = {
-          displayName: user.displayName,
-          email: user.email,
-          emailVerified: user.emailVerified,
-          phoneNumber: user.phoneNumber,
-          photoURL: user.photoURL
-        };
-        localStorage.setItem('user', JSON.stringify(this.currentUser));
-      } else {
-        localStorage.setItem('user', null);
-      }
-    });
+    // this.firebaseAuth.authState.subscribe((user: firebase.User) => {
+    //   if (user) {
+    //     this.currentUser = {
+    //       displayName: user.displayName,
+    //       email: user.email,
+    //       emailVerified: user.emailVerified,
+    //       phoneNumber: user.phoneNumber,
+    //       photoURL: user.photoURL
+    //     };
+    //     this.storage.set('user', this.currentUser);
+    //   } else {
+    //     this.storage.set('user', null);
+    //   }
+    // });
   }
 
   getAuthState(): Observable<firebase.User> {
@@ -58,7 +59,9 @@ export class AuthService {
   }
 
   sendEmailVerification(): Promise<any> {
-    return this.firebaseAuth.user.toPromise().then(user => user.sendEmailVerification());
+    return this.firebaseAuth.currentUser.then(user => {
+      return user.sendEmailVerification();
+    });
   }
 
   // TODO: to fix for profile page

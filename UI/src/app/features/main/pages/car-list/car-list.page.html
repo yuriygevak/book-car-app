@@ -19,12 +19,4 @@
   </ng-container>
 </ion-content>
 
-<ion-tab-bar slot="bottom">
-  <ion-tab-button *ngFor="let tab of tabs"
-                  tab="{{ tab.name }}"
-                  routerLink="{{ tab.link }}"
-                  routerLinkActive="active">
-    <ion-icon name="{{ tab.icon }}"></ion-icon>
-    <ion-label>{{ tab.name }}</ion-label>
-  </ion-tab-button>
-</ion-tab-bar>
+<app-tab-bar></app-tab-bar>

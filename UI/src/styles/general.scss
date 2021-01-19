@@ -92,3 +92,8 @@ select {
 .d-flex {
   display: flex;
 }
+
+.error-message {
+  text-align: center;
+  color: $error-txt;
+}

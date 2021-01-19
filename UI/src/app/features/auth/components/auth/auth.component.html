@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar>
+    <app-back-link [color]="'grey'"></app-back-link>
     <ion-title class="page-title">
       <ng-container *ngIf="!isResetPassword">{{ currentPage }}</ng-container>
       <ng-container *ngIf="isResetPassword">Reset your password</ng-container>
@@ -7,7 +8,6 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-
   <div class="page-content">
     <div>
       <div class="page-image-container">
@@ -15,6 +15,9 @@
       </div>
 
       <ng-container *ngIf="!isResetPassword">
+
+        <p *ngIf="showError" class="error-message">{{ errorMessage }}</p>
+
         <app-login *ngIf="currentPage === 'login'"
                    [form]="form"
                    (resetPasswordEvent)="switchToResetPassword($event)"></app-login>
@@ -53,7 +56,10 @@
       </div>
       <ion-button expand="block"
                   class="orange-btn"
-      >{{ currentPage }}</ion-button>
+                  (click)="submit()">
+        <ng-container *ngIf="!resetPasswordForm">{{ currentPage }}</ng-container>
+        <ng-container *ngIf="resetPasswordForm">Reset Password</ng-container>
+      </ion-button>
     </div>
 
   </div>

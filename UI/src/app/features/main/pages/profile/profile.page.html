@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="page-title">profile</ion-title>
+    <app-back-link [color]="'grey'"></app-back-link>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-spinner *ngIf="showSpinner"
+               name="lines"
+               class="spinner"
+  ></ion-spinner>
+
+  <ion-list *ngIf="!showSpinner">
+    <ion-item *ngFor="let item of profileNavigation">
+      <ion-label class="profile-label"
+                 routerLink="{{ item.link }}"
+      >{{ item.name }}</ion-label>
+    </ion-item>
+    <ng-container *ngIf="!isUserLogged">
+      <ion-item>
+        <ion-label class="profile-label"
+                   routerLink="/auth"
+                   [queryParams]="{authOption: 'login'}"
+        >login</ion-label>
+      </ion-item>
+    </ng-container>
+    <ng-container *ngIf="isUserLogged">
+      <ion-item (click)="logout()">
+        <ion-label>Logout</ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>
+
+<app-tab-bar></app-tab-bar>

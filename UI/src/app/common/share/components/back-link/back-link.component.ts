@@ -1,7 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input, OnChanges,
+  Input,
+  OnChanges,
   OnInit,
   SimpleChanges
 } from '@angular/core';

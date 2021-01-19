@@ -47,6 +47,10 @@ const routes: Routes = [
         path: 'congratulations',
         loadChildren: () => import('./pages/congratulations/congratulations.module').then( m => m.CongratulationsPageModule)
       },
+      {
+        path: 'profile',
+        loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+      },
     ]
   },
   {
@@ -54,7 +58,6 @@ const routes: Routes = [
     redirectTo: 'car-list',
     pathMatch: 'full'
   },
-
 ];
 
 @NgModule({

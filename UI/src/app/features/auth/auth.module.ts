@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AuthComponent, LoginComponent, RegisterComponent } from './components';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthService } from './services';
+import { BackLinkModule } from '../../common/share/components/back-link/back-link.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AuthService } from './services';
   imports: [
     CommonModule,
     AuthRoutingModule,
+    BackLinkModule,
     FormsModule,
     IonicModule,
     ReactiveFormsModule,

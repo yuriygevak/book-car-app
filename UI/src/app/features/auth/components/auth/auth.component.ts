@@ -2,13 +2,15 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnDestroy,
   OnInit
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { Subscription } from 'rxjs';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 import { AuthService } from '../../services';
 import { setFormState } from '../../../../common/core/utils';
@@ -19,12 +21,11 @@ import { setFormState } from '../../../../common/core/utils';
   styleUrls: ['./auth.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthComponent implements OnDestroy, OnInit {
+export class AuthComponent implements OnInit {
   currentPage = 'login';
   errorMessage: string;
   form: FormGroup;
   isResetPassword = false;
-  paramsSubscription: Subscription;
   resetPasswordForm: FormGroup;
   showError = false;
   showResetPasswordVerifyMessage = false;
@@ -40,14 +41,12 @@ export class AuthComponent implements OnDestroy, OnInit {
     this.route.queryParams.subscribe(params => {
       if (params && params.authOption) {
         this.currentPage = params.authOption;
+        this.initForm();
+        this.cdr.markForCheck();
       }
     });
 
     this.initForm();
-  }
-
-  ngOnDestroy(): void {
-    this.paramsSubscription.unsubscribe();
   }
 
   switchForm(authOption: string): void {
@@ -115,6 +114,8 @@ export class AuthComponent implements OnDestroy, OnInit {
 
   private showFormError() {
     this.showError = true;
+    this.cdr.markForCheck();
+
     setTimeout(() => {
       this.showError = false;
       this.cdr.markForCheck();
@@ -124,10 +125,19 @@ export class AuthComponent implements OnDestroy, OnInit {
   async login(): Promise<void> {
     try {
       const userCreds = await this.authService.login(this.form.value);
-      if (!userCreds.user.emailVerified) {
+
+      console.log('userCreds', userCreds);
+
+      if (!userCreds?.user?.emailVerified) {
         this.errorMessage = 'Please verify your email before login. Click on the link that has been sent to your email account.';
         this.showFormError();
       }
+
+      // displayName: "yurii"
+      // email: "yuriygevak@gmail.com"
+      // emailVerified: true
+
+      this.router.navigate(['/profile']);
 
     } catch (err) {
       this.errorMessage = err.message ? err.message : 'Login failed, please try again';
@@ -152,12 +162,10 @@ export class AuthComponent implements OnDestroy, OnInit {
         });
         await this.authService.sendEmailVerification();
         this.showVerificationMessage = true;
-
-        // todo: after verify email user should be logged
         this.cdr.markForCheck();
         return;
       } catch (err) {
-        console.log('err', err);
+        console.log('err: ', err);
         this.errorMessage = err.message ? err.message : 'Registration failed, please try again';
         this.showFormError();
         return;

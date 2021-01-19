@@ -1,5 +1,6 @@
 export interface Navigation {
-  icon: string;
+  icon?: string;
   link?: string;
+  queryLinkParam?: string;
   name: string;
 }

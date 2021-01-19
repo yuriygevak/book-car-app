@@ -7,8 +7,6 @@ import {
 
 import { ApiService } from '../../services';
 import { CarInfo } from '../../models';
-import { Navigation } from '../../../../common/core/models';
-import { tabs } from '../../../../common/core/constants';
 
 @Component({
   selector: 'app-car-list',
@@ -19,7 +17,6 @@ import { tabs } from '../../../../common/core/constants';
 export class CarListPage implements OnInit {
   carList: CarInfo[] = [];
   showSpinner = false;
-  tabs: Navigation[] = tabs;
 
   constructor(private apiService: ApiService,
               private cdr: ChangeDetectorRef) { }

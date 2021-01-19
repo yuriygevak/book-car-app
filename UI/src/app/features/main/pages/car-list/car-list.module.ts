@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CarCardComponent } from '../../components';
 import { CarListPage } from './car-list.page';
 import { CarListPageRoutingModule } from './car-list-routing.module';
+import { TabBarModule } from '../../../../common/share/components/tab-bar/tap-bar.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CarListPageRoutingModule
+    CarListPageRoutingModule,
+    TabBarModule
   ],
   declarations: [
     CarCardComponent,
