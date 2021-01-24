@@ -1,3 +1,5 @@
+import {CarInfo} from './car-info';
+
 export class BookingDetails {
   firstName: string;
   lastName: string;
@@ -8,4 +10,7 @@ export class BookingDetails {
   date: Date;
   flight?: string;
   notes?: string;
+  carId?: string;
+  carDetails?: CarInfo;
+  id: string;
 }

@@ -1,0 +1,31 @@
+.info-text {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.big-link {
+  font-size: 18px;
+}
+
+.booking {
+  margin-bottom: 40px;
+
+  .booking-title {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 0 10px;
+  }
+
+  .name-col {
+    font-weight: 600;
+  }
+
+  .value-col {
+
+  }
+
+  .cancel-link-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

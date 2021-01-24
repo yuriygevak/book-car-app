@@ -13,6 +13,13 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
+  getBookings(userId): Observable<BookingDetails[]> {
+    const params = {
+      userId
+    };
+    return this.http.get<BookingDetails[]>(`${this.url}/bookings`, {params});
+  }
+
   getCarList(): Observable<CarInfo[]> {
     return this.http.get<CarInfo[]>(`${this.url}/carList`);
   }
@@ -20,6 +27,13 @@ export class ApiService {
   getCarDetails(id: string): Observable<CarDetails> {
     const params = { id };
     return this.http.get<CarDetails>(`${this.url}/carDetails`, { params });
+  }
+
+  removeBooking(id: string): Observable<BookingDetails[]> {
+    const params = {
+      id
+    };
+    return this.http.delete<BookingDetails[]>(`${this.url}/removeBooking`, {params});
   }
 
   saveBooking(booking: BookingDetails, carId: string): Observable<any> {

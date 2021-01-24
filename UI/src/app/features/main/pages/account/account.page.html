@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <app-back-link [color]="'grey'"></app-back-link>
+    <ion-title class="page-title">account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-content">
+    <ng-container *ngIf="!user">
+      <p class="info-text">Please log in to check your account</p>
+      <a class="link orange-link">Login</a>
+    </ng-container>
+
+    <ng-container *ngIf="user">
+      <h3 class="account-title">Account Details</h3>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" class="name-col">
+            Name
+          </ion-col>
+          <ion-col size="8" class="value-col">
+            {{ user.displayName }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4" class="name-col">
+            Email
+          </ion-col>
+          <ion-col size="8" class="value-col">
+            {{ user.email }}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-container>
+  </div>
+</ion-content>
+
+<app-tab-bar></app-tab-bar>

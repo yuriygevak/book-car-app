@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { Navigation } from '../../../core/models';
 import { tabs } from '../../../core/constants';
@@ -7,6 +7,7 @@ import { tabs } from '../../../core/constants';
   selector: 'app-tab-bar',
   templateUrl: './tab-bar.component.html',
   styleUrls: ['./tab-bar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabBarComponent implements OnInit {
 

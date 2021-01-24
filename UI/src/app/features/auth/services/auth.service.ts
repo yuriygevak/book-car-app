@@ -38,9 +38,9 @@ export class AuthService {
     return this.firebaseAuth.user;
   }
 
-  getUserToken(): Observable<any> {
-    return this.firebaseAuth.idTokenResult;
-  }
+  // getUserToken(): Observable<any> {
+  //   return this.firebaseAuth.idTokenResult;
+  // }
 
   login(user: User): Promise<any> {
     return this.firebaseAuth.signInWithEmailAndPassword(user.email, user.password);

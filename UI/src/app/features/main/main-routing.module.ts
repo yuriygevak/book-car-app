@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { BookingDetailsResolver, CarResolver } from './resolvers';
+import { BookingDetailsResolver, CarResolver, UserResolver } from './resolvers';
 import { MainComponent } from './containers';
 import { PaymentGuard } from './guards';
 
@@ -49,7 +49,24 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+        loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+        resolve: {
+          user: UserResolver
+        }
+      },
+      {
+        path: 'profile/account',
+        loadChildren: () => import('./pages/account/account.module').then( m => m.AccountPageModule),
+        resolve: {
+          user: UserResolver
+        }
+      },
+      {
+        path: 'profile/user-bookings',
+        loadChildren: () => import('./pages/user-bookings/user-bookings.module').then( m => m.UserBookingsPageModule),
+        resolve: {
+          user: UserResolver
+        }
       },
     ]
   },
@@ -65,7 +82,8 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [
     BookingDetailsResolver,
-    CarResolver
+    CarResolver,
+    UserResolver
   ]
 })
 export class MainRoutingModule {}

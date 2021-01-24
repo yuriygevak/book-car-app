@@ -6,28 +6,30 @@
 </ion-header>
 
 <ion-content>
-  <ion-spinner *ngIf="showSpinner"
-               name="lines"
-               class="spinner"
-  ></ion-spinner>
-
-  <ion-list *ngIf="!showSpinner">
+  <ion-list>
     <ion-item *ngFor="let item of profileNavigation">
       <ion-label class="profile-label"
-                 routerLink="{{ item.link }}"
-      >{{ item.name }}</ion-label>
+                 routerLink="{{ item.link }}">
+        <ion-icon class="profile-icon" name="{{ item.icon }}"></ion-icon>
+        {{ item.name }}
+      </ion-label>
     </ion-item>
     <ng-container *ngIf="!isUserLogged">
       <ion-item>
         <ion-label class="profile-label"
                    routerLink="/auth"
-                   [queryParams]="{authOption: 'login'}"
-        >login</ion-label>
+                   [queryParams]="{authOption: 'login'}">
+          <ion-icon class="profile-icon" name="log-in-outline"></ion-icon>
+          login
+        </ion-label>
       </ion-item>
     </ng-container>
     <ng-container *ngIf="isUserLogged">
       <ion-item (click)="logout()">
-        <ion-label>Logout</ion-label>
+        <ion-label class="profile-label">
+          <ion-icon class="profile-icon" name="log-out-outline"></ion-icon>
+          Logout
+        </ion-label>
       </ion-item>
     </ng-container>
   </ion-list>

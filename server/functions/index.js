@@ -22,6 +22,18 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+app.get('/bookings', async (req, res) => {
+    const userId = req.query.userId;
+    admin.database().ref('/bookings').once('value')
+        .then(data => {
+            const userBookings = Object.values(data.val()).filter(item => item.email === userId);
+            return res.send(JSON.stringify(userBookings));
+        })
+        .catch(err => {
+            return res.send(err);
+        });
+});
+
 app.get('/carList', (req, res) => {
     admin.firestore().collection('carList').get()
         .then(querySnapshot => {
@@ -67,11 +79,35 @@ app.get('/carDetails', (req, res) => {
         });
 });
 
+app.delete('/removeBooking', async (req, res) => {
+    const bookingId = req.query.id;
+    admin.database().ref('/bookings')
+        .orderByChild('id')
+        .equalTo(bookingId)
+        .once('value')
+        .then(snapshot => {
+            const dataRef = Object.keys(snapshot.val())[0];
+            admin.database().ref('/bookings')
+                .child(dataRef)
+                .remove()
+                .then(() => {
+                    return res.send(JSON.stringify({message: 'Booking was removed'}));
+                })
+                .catch(() => {
+                    return res.send(JSON.stringify({message: 'Remove error'}));
+                });
+        });
+});
+
 app.post('/saveBooking', (req, res) => {
     const booking = req.body;
+    booking.id = uuid();
     admin.database().ref('/bookings').push(booking)
         .then(() => {
             return res.send(JSON.stringify({message: 'Booking was saved'}));
+        })
+        .catch(err => {
+            return res.send(err);
         });
 });
 
@@ -79,4 +115,11 @@ exports.expressApp = functions.https.onRequest(app);
 
 function setImageUrl(storagePath) {
     return `${bucketUrl}${encodeURIComponent(storagePath)}?alt=media`;
+}
+
+function uuid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
 }

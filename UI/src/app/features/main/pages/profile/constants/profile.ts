@@ -3,10 +3,12 @@ import { Navigation } from '../../../../../common/core/models';
 export const profile: Navigation[] = [
     {
         name: 'account',
-        link: '/user-account',
+        link: '/profile/account',
+        icon: 'person-circle-outline'
     },
     {
         name: 'bookings',
-        link: '/user-bookings',
+        link: '/profile/user-bookings',
+        icon: 'bookmarks-outline'
     },
 ];

@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   OnInit,
   ViewChild
@@ -15,6 +16,7 @@ import { CalendarComponent } from 'ionic2-calendar/calendar';
   selector: 'app-calendar-modal',
   templateUrl: './calendar-modal.component.html',
   styleUrls: ['./calendar-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarModalComponent implements AfterViewInit, OnInit {
   calendar = {

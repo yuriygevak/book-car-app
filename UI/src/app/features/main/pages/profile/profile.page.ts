@@ -4,6 +4,10 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { AuthService } from '../../../auth/services';
 import { Navigation } from '../../../../common/core/models';
@@ -18,27 +22,25 @@ import { profile } from './constants';
 export class ProfilePage implements OnInit {
   isUserLogged = false;
   profileNavigation: Navigation[] = profile;
-  showSpinner = true;
+
+  private destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private authService: AuthService,
-              private cdr: ChangeDetectorRef) { }
+              private cdr: ChangeDetectorRef,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.checkUserLogin();
+    this.route.data
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(data => {
+          this.isUserLogged = !!data.user;
+          this.cdr.markForCheck();
+        });
   }
 
   logout(): void {
     this.authService.logout().then(() => {
       this.isUserLogged = false;
-    });
-  }
-
-  private checkUserLogin(): void {
-    this.authService.getAuthState().subscribe(user => {
-      if (user) {
-        this.isUserLogged = true;
-      }
-      this.showSpinner = false;
       this.cdr.markForCheck();
     });
   }

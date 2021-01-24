@@ -1,3 +1,13 @@
+@import "../../../../../styles/variables";
+
 .profile-label {
   text-transform: capitalize;
+  display: flex;
+  align-items: center;
+
+  .profile-icon {
+    font-size: 18px;
+    margin-right: 8px;
+    color: $orange-bg;
+  }
 }

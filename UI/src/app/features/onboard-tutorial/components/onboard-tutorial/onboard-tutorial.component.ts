@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Storage } from '@ionic/storage';
@@ -10,6 +10,7 @@ import { Slide } from '../../models';
   selector: 'app-onboard-launch',
   templateUrl: './onboard-tutorial.component.html',
   styleUrls: ['./onboard-tutorial.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OnboardTutorialComponent implements OnInit {
   slideOpts = {
