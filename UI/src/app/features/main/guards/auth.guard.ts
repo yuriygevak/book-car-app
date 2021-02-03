@@ -21,12 +21,12 @@ export class AuthGuard implements CanActivate {
             const authNavigateConfirm = await this.showAuthWarningModal();
             if (authNavigateConfirm.data && authNavigateConfirm.data.auth) {
                 this.router.navigate(['/auth'], { queryParams: { authOption: 'login' }});
-                return true;
             } else {
                 this.router.navigate([this.router.url]);
-                return false;
             }
+            return false;
         }
+        return true;
     }
 
     async showAuthWarningModal(): Promise<any> {

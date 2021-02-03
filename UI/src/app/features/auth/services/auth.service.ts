@@ -3,32 +3,13 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase';
 import { Observable } from 'rxjs';
-import { Storage } from '@ionic/storage';
 
-import { StorageUser, User } from '../../../common/core/models';
+import { User } from '../../../common/core/models';
 
 @Injectable()
 export class AuthService {
-  currentUser: StorageUser = null;
 
-  constructor(public firebaseAuth: AngularFireAuth,
-              private storage: Storage) {
-    // TODO: add type for user
-    // this.firebaseAuth.authState.subscribe((user: firebase.User) => {
-    //   if (user) {
-    //     this.currentUser = {
-    //       displayName: user.displayName,
-    //       email: user.email,
-    //       emailVerified: user.emailVerified,
-    //       phoneNumber: user.phoneNumber,
-    //       photoURL: user.photoURL
-    //     };
-    //     this.storage.set('user', this.currentUser);
-    //   } else {
-    //     this.storage.set('user', null);
-    //   }
-    // });
-  }
+  constructor(public firebaseAuth: AngularFireAuth) {}
 
   getAuthState(): Observable<firebase.User> {
     return this.firebaseAuth.authState;
@@ -37,10 +18,6 @@ export class AuthService {
   getUserData(): Observable<firebase.User> {
     return this.firebaseAuth.user;
   }
-
-  // getUserToken(): Observable<any> {
-  //   return this.firebaseAuth.idTokenResult;
-  // }
 
   login(user: User): Promise<any> {
     return this.firebaseAuth.signInWithEmailAndPassword(user.email, user.password);
@@ -63,15 +40,4 @@ export class AuthService {
       return user.sendEmailVerification();
     });
   }
-
-  // TODO: to fix for profile page
-  // updateUser(user: StorageUser): Promise<any> {
-  //   return Promise.all([
-  //     this.firebaseAuth.user.toPromise(u => u.updateEmail(user.email)),
-  //     this.firebaseAuth.user.toPromise(u => u.updateProfile({
-  //       displayName: user.displayName,
-  //       photoURL: null
-  //     }))
-  //   ]);
-  // }
 }

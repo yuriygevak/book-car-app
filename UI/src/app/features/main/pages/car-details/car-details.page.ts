@@ -51,7 +51,6 @@ export class CarDetailsPage implements OnInit {
   }
 
   goToBooking(): void {
-    // todo: pass selected car
     this.router.navigate(['/booking']);
   }
 

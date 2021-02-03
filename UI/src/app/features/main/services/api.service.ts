@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 
 import { BookingDetails, CarInfo } from '../models';
 import { CarDetails} from '../pages/car-details/models';
+import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class ApiService {
-  // todo: local url for development
-  url = 'http://localhost:5001/book-car-mobile/us-central1/expressApp';
+  url = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 

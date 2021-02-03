@@ -12,7 +12,8 @@ export const environment = {
     messagingSenderId: '943666329822',
     appId: '1:943666329822:web:597100835f6ec056f7ea4f',
     measurementId: 'G-QNH7WHSKFK'
-  }
+  },
+  apiUrl: 'http://localhost:5001/book-car-mobile/us-central1/expressApp'
 };
 
 /*
