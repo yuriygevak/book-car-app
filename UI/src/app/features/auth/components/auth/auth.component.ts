@@ -126,16 +126,10 @@ export class AuthComponent implements OnInit {
     try {
       const userCreds = await this.authService.login(this.form.value);
 
-      console.log('userCreds', userCreds);
-
       if (!userCreds?.user?.emailVerified) {
         this.errorMessage = 'Please verify your email before login. Click on the link that has been sent to your email account.';
         this.showFormError();
       }
-
-      // displayName: "yurii"
-      // email: "yuriygevak@gmail.com"
-      // emailVerified: true
 
       this.router.navigate(['/profile']);
 

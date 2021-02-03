@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Router } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 
 import { ModalController } from '@ionic/angular';
 
@@ -9,23 +9,24 @@ import { AuthService } from '../../auth/services';
 import { AuthWarningModalComponent } from '../modals';
 
 @Injectable()
-export class AuthGuard implements CanLoad {
+export class AuthGuard implements CanActivate {
 
     constructor(private authService: AuthService,
                 public modalController: ModalController,
                 private router: Router) {}
 
-    async canLoad(): Promise<boolean> {
+    async canActivate(): Promise<boolean> {
         const user = await this.authService.getAuthState().pipe(first()).toPromise();
         if (!user) {
             const authNavigateConfirm = await this.showAuthWarningModal();
             if (authNavigateConfirm.data && authNavigateConfirm.data.auth) {
                 this.router.navigate(['/auth'], { queryParams: { authOption: 'login' }});
+                return true;
             } else {
+                this.router.navigate([this.router.url]);
                 return false;
             }
         }
-        return true;
     }
 
     async showAuthWarningModal(): Promise<any> {

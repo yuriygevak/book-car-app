@@ -37,7 +37,7 @@ const routes: Routes = [
           selectedCar: CarResolver,
           user: UserResolver
         },
-        canLoad: [AuthGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'payment',

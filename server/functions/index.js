@@ -81,13 +81,14 @@ app.get('/carDetails', (req, res) => {
 
 app.delete('/removeBooking', async (req, res) => {
     const bookingId = req.query.id;
-    admin.database().ref('/bookings')
+    const bookingsDb = admin.database().ref('/bookings');
+    bookingsDb
         .orderByChild('id')
         .equalTo(bookingId)
         .once('value')
         .then(snapshot => {
             const dataRef = Object.keys(snapshot.val())[0];
-            admin.database().ref('/bookings')
+            bookingsDb
                 .child(dataRef)
                 .remove()
                 .then(() => {
