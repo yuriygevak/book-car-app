@@ -14,7 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { BookingDetailsStorageService } from '../../services';
-import { BookingDetails } from '../../models';
+import { BookingDetails, CarInfo, User } from '../../models';
 import { CalendarModalComponent } from '../../modals';
 import { setFormState } from '../../../../common/core/utils';
 
@@ -28,7 +28,9 @@ export class BookingPage implements OnInit {
   form: FormGroup;
   phoneRegex = '(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{4}[)]?))\s*[)]?[-\s\.]?[(]?[0-9]{1,3}[)]?([-\s\.]?[0-9]{3})([-\s\.]?[0-9]{3,4})';
   selectedTime: Date = null;
+  selectedCar: CarInfo = null;
   showFormError = false;
+  user: User = null;
   @ViewChild('bookingTitle', {static: false}) titleEl: ElementRef;
 
   private destroy$: Subject<boolean> = new Subject<boolean>();
@@ -44,24 +46,37 @@ export class BookingPage implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         const bookingDetails: BookingDetails = data.bookingDetails;
+        this.selectedCar = data.selectedCar;
+        this.user = data.user;
         this.initForm();
         if (bookingDetails) {
           this.form.patchValue(bookingDetails, {emitEvent: false});
         }
+        this.form.get('email').patchValue(this.user.email, {emitEvent: false});
       });
   }
 
   submitForm(): void {
     if (!this.form.valid) {
-      setFormState(this.form.controls['contacts']);
-      setFormState(this.form.controls['trip']);
+      setFormState(this.form.get('contacts'));
+      setFormState(this.form.get('trip'));
       this.showFormError = true;
       this.titleEl.nativeElement.scrollIntoView({behavior: 'smooth'});
       setTimeout(() => {
         this.showFormError = false;
       }, 1000);
     } else {
-      this.bookingDetailsStorageService.setStoredBookingDetails(this.form.value);
+      this.bookingDetailsStorageService.setStoredBookingDetails(
+          {
+            ...this.form.value,
+            userId: this.user.uid,
+            carDetails: {
+              class: this.selectedCar.class,
+              id: this.selectedCar.id,
+              name: this.selectedCar.name,
+              price:  this.selectedCar.price
+            }
+          });
       this.router.navigate(['/payment']);
     }
   }

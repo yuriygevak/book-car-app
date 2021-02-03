@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { BookingDetails, CarInfo } from '../../models';
+import { BookingDetails } from '../../models';
 import { ApiService, BookingDetailsStorageService } from '../../services';
 import { paymentMethods } from './constants';
 
@@ -20,7 +20,6 @@ import { paymentMethods } from './constants';
 })
 export class PaymentPage implements OnInit {
   bookingDetails: BookingDetails = new BookingDetails();
-  carDetails: CarInfo = new CarInfo();
   paymentMethods = paymentMethods;
   objectKeys = Object.keys;
 
@@ -36,13 +35,12 @@ export class PaymentPage implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         this.bookingDetails = data.bookingDetails;
-        this.carDetails = data.selectedCar;
       });
   }
 
   choosePayMethod(): void {
     // todo: just skip payment and save booking details and go to congratulations page
-    this.apiService.saveBooking(this.bookingDetails, this.carDetails.id).subscribe(resp => {
+    this.apiService.saveBooking(this.bookingDetails).subscribe(resp => {
       this.bookingDetailsStorageService.setStoredBookingDetails(null);
       this.router.navigate(['/congratulations']);
     });

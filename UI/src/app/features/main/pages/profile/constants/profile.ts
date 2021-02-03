@@ -4,11 +4,11 @@ export const profile: Navigation[] = [
     {
         name: 'account',
         link: '/profile/account',
-        icon: 'person-circle-outline'
+        icon: 'person-circle'
     },
     {
         name: 'bookings',
         link: '/profile/user-bookings',
-        icon: 'bookmarks-outline'
+        icon: 'bookmarks'
     },
 ];

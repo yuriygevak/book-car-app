@@ -13,4 +13,5 @@ export class BookingDetails {
   carId?: string;
   carDetails?: CarInfo;
   id: string;
+  userId?: string;
 }

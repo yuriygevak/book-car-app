@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { BookingDetailsResolver, CarResolver, UserResolver } from './resolvers';
 import { MainComponent } from './containers';
-import { PaymentGuard } from './guards';
+import { AuthGuard, PaymentGuard } from './guards';
 
 const routes: Routes = [
   {
@@ -32,7 +32,12 @@ const routes: Routes = [
       {
         path: 'booking',
         loadChildren: () => import('./pages/booking/booking.module').then( m => m.BookingPageModule),
-        resolve: { bookingDetails: BookingDetailsResolver }
+        resolve: {
+          bookingDetails: BookingDetailsResolver,
+          selectedCar: CarResolver,
+          user: UserResolver
+        },
+        canLoad: [AuthGuard],
       },
       {
         path: 'payment',
@@ -40,7 +45,6 @@ const routes: Routes = [
         canLoad: [PaymentGuard],
         resolve: {
           bookingDetails: BookingDetailsResolver,
-          selectedCar: CarResolver
         },
       },
       {

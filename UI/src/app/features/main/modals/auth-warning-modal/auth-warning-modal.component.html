@@ -1,0 +1,19 @@
+<div class="page-content">
+  <ion-title class="page-title modal-title">
+    Warning
+    <ion-icon
+      name="close-outline"
+      class="close-icon"
+      (click)="dismiss(false)"
+    ></ion-icon>
+  </ion-title>
+  <div class="page-image-container">
+    <img src="/assets/icons/login-icon.svg" class="page-image">
+  </div>
+  <p class="modal-text">
+    Please <span (click)="dismiss(true)" class="link orange-link">login</span> to proceed with booking
+  </p>
+  <p class="modal-text">
+    or <span (click)="dismiss(false)" class="link orange-link">cancel</span> to select a car
+  </p>
+</div>

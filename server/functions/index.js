@@ -26,7 +26,7 @@ app.get('/bookings', async (req, res) => {
     const userId = req.query.userId;
     admin.database().ref('/bookings').once('value')
         .then(data => {
-            const userBookings = Object.values(data.val()).filter(item => item.email === userId);
+            const userBookings = Object.values(data.val()).filter(item => item.userId === userId);
             return res.send(JSON.stringify(userBookings));
         })
         .catch(err => {

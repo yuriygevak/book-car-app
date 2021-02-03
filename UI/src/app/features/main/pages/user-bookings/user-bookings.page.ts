@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { forkJoin, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { ApiService, CarStorageService } from '../../services';
@@ -62,15 +62,9 @@ export class UserBookingsPage implements OnInit {
     }
 
     private getBookingsData(): void {
-        forkJoin([
-            this.apiService.getBookings(this.user.uid),
-            this.apiService.getCarList()
-        ]).subscribe(data => {
-            if (data[0].length) {
-                this.userBookings = data[0].map((booking: BookingDetails) => {
-                    booking.carDetails = data[1].find((car: CarInfo) => booking.carId === car.id);
-                    return booking;
-                });
+        this.apiService.getBookings(this.user.uid).subscribe(data => {
+            if (data.length) {
+                this.userBookings = data;
             }
             this.showSpinner = false;
             this.cdr.markForCheck();

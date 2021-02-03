@@ -36,13 +36,8 @@ export class ApiService {
     return this.http.delete<BookingDetails[]>(`${this.url}/removeBooking`, {params});
   }
 
-  saveBooking(booking: BookingDetails, carId: string): Observable<any> {
-    // carId is for possible retrieving data on BE side
-    const payload = {
-      ...booking,
-      carId
-    };
-    return this.http.post<any>(`${this.url}/saveBooking`, payload);
+  saveBooking(booking: BookingDetails): Observable<any> {
+    return this.http.post<any>(`${this.url}/saveBooking`, booking);
   }
 
 }

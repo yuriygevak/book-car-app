@@ -102,6 +102,18 @@
           ></ion-textarea>
         </ion-item>
       </div>
+      <div class="form-control">
+        <ion-icon name="car" class="form-control-icon"></ion-icon>
+        <ion-item>
+          {{ selectedCar.name }}
+        </ion-item>
+      </div>
+      <div class="form-control">
+        <ion-icon name="pricetag" class="form-control-icon"></ion-icon>
+        <ion-item>
+          {{ selectedCar.price }}
+        </ion-item>
+      </div>
 
       <ion-button class="orange-btn book-form-btn" (click)="submitForm()">
         Book Now

@@ -19,7 +19,7 @@
         <ion-label class="profile-label"
                    routerLink="/auth"
                    [queryParams]="{authOption: 'login'}">
-          <ion-icon class="profile-icon" name="log-in-outline"></ion-icon>
+          <ion-icon class="profile-icon" name="log-in"></ion-icon>
           login
         </ion-label>
       </ion-item>
@@ -27,7 +27,7 @@
     <ng-container *ngIf="isUserLogged">
       <ion-item (click)="logout()">
         <ion-label class="profile-label">
-          <ion-icon class="profile-icon" name="log-out-outline"></ion-icon>
+          <ion-icon class="profile-icon" name="log-out"></ion-icon>
           Logout
         </ion-label>
       </ion-item>

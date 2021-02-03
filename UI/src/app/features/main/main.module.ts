@@ -9,12 +9,14 @@ import {
   CarStorageService
 } from './services';
 import { AuthService } from '../auth/services';
-import { PaymentGuard } from './guards';
+import { AuthGuard, PaymentGuard } from './guards';
+import { AuthWarningModalComponent } from './modals';
 import { MainComponent } from './containers';
 import { MainRoutingModule } from './main-routing.module';
 
 @NgModule({
   declarations: [
+    AuthWarningModalComponent,
     MainComponent
   ],
   imports: [
@@ -24,6 +26,7 @@ import { MainRoutingModule } from './main-routing.module';
   ],
   providers: [
     ApiService,
+    AuthGuard,
     AuthService,
     BookingDetailsStorageService,
     CarStorageService,

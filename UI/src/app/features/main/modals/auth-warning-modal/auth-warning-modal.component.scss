@@ -1,0 +1,23 @@
+.modal-title {
+  position: relative;
+  text-transform: uppercase;
+
+  .close-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    font-size: 24px;
+  }
+}
+
+.page-image {
+  display: block;
+  margin: 40px auto;
+}
+
+.modal-text {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}

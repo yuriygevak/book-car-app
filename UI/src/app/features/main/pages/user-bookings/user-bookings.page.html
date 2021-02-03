@@ -75,7 +75,9 @@
               </ion-col>
               <ion-col size="8" class="value-col">
                 <a class="link orange-link"
-                    (click)="navigateToCarDetails(booking.carDetails)">{{ booking.carDetails.name }} ({{ booking.carDetails.class }})</a>
+                    (click)="navigateToCarDetails(booking.carDetails)">
+                  {{ booking.carDetails.name }} ({{ booking.carDetails.class }})
+                </a>
               </ion-col>
             </ion-row>
             <ion-row *ngIf="booking.flight">
